@@ -1,0 +1,19 @@
+appId: com.teegee6t9.soundgee
+productName: SoundGee
+directories:
+  buildResources: resources
+  output: release
+files:
+  - out/**/*
+  - package.json
+extraResources:
+  - from: resources
+    to: resources
+win:
+  target:
+    - target: nsis
+    - target: portable
+  icon: resources/icon.png
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true

@@ -1,0 +1,70 @@
+{
+  "app": {
+    "title": "SoundGee"
+  },
+  "sidebar": {
+    "newSoundboard": "New soundboard",
+    "rename": "Rename",
+    "delete": "Delete",
+    "export": "Export",
+    "import": "Import pack",
+    "confirmDeleteBoard": "Delete this soundboard and all its sounds?",
+    "noBoards": "No soundboards yet. Create one to get started.",
+    "newBoardPrompt": "Soundboard name",
+    "renameBoardPrompt": "New name"
+  },
+  "grid": {
+    "addSound": "Add sound",
+    "noSounds": "No sounds yet. Click \"Add sound\" to import one."
+  },
+  "sound": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirmDeleteSound": "Delete this sound?",
+    "name": "Name",
+    "color": "Color",
+    "volume": "Volume",
+    "hotkey": "Hotkey"
+  },
+  "modal": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "create": "Create"
+  },
+  "import": {
+    "title": "Add a sound",
+    "localFile": "Local file",
+    "chooseFile": "Choose a file...",
+    "noFileChosen": "No file chosen",
+    "orUrl": "Or a direct audio URL",
+    "urlPlaceholder": "https://example.com/sound.mp3",
+    "name": "Name",
+    "namePlaceholder": "Sound name",
+    "submit": "Add",
+    "downloading": "Downloading..."
+  },
+  "hotkey": {
+    "record": "Click to record",
+    "pressKey": "Press a key combo...",
+    "clear": "Clear",
+    "conflict": "This shortcut is already used by another app or sound."
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "outputDevices": "Audio outputs",
+    "outputDevicesHint": "Select every device the sounds should play through at once (e.g. your speakers and a virtual cable so others hear it too).",
+    "masterVolume": "Master volume",
+    "audioGuide": "How to make others hear your sounds",
+    "close": "Close"
+  },
+  "guide": {
+    "title": "Audio setup guide",
+    "intro": "By default, sounds only play on your own speakers. To have others hear them too (Discord, in-game voice chat...), you need a free virtual audio cable that SoundGee can send sound to at the same time as your speakers.",
+    "step1": "1. Install VB-CABLE (free) from vb-audio.com and restart your computer if prompted.",
+    "step2": "2. In SoundGee's Settings, tick \"CABLE Input (VB-Audio Virtual Cable)\" in Audio outputs, in addition to your normal speakers.",
+    "step3": "3. In Discord (or your game), set your Microphone/Input device to \"CABLE Output (VB-Audio Virtual Cable)\".",
+    "step4": "4. To still talk while using the soundboard, use a free mixer like Voicemeeter to combine your real microphone and VB-CABLE into a single input device.",
+    "linkLabel": "Open vb-audio.com"
+  }
+}
