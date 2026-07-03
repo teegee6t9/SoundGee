@@ -3,15 +3,29 @@
     "title": "SoundGee"
   },
   "sidebar": {
-    "newSoundboard": "Nouveau soundboard",
+    "newSoundboard": "Nouveau pack",
     "rename": "Renommer",
     "delete": "Supprimer",
     "export": "Exporter",
     "import": "Importer un pack",
-    "confirmDeleteBoard": "Supprimer ce soundboard et tous ses sons ?",
-    "noBoards": "Aucun soundboard pour l'instant. Crées-en un pour commencer.",
-    "newBoardPrompt": "Nom du soundboard",
-    "renameBoardPrompt": "Nouveau nom"
+    "confirmDeleteBoard": "Supprimer ce pack et tous ses sons ?",
+    "noBoards": "Aucun pack pour l'instant. Crées-en un pour commencer.",
+    "newBoardPrompt": "Nom du pack",
+    "renameBoardPrompt": "Nouveau nom",
+    "apps": "Applications",
+    "appsGeneral": "Général",
+    "appsActiveNow": "Actif maintenant"
+  },
+  "apps": {
+    "title": "Applications associées",
+    "hint": "Ce pack n'est actif (raccourcis utilisables) que quand une de ces applications est au premier plan, en plus des packs généraux qui restent toujours actifs.",
+    "running": "Applications en cours d'exécution",
+    "refresh": "Rafraîchir",
+    "noneFound": "Aucune fenêtre détectée. Lance l'appli puis clique sur Rafraîchir, ou ajoute-la manuellement ci-dessous.",
+    "manualLabel": "Ajouter manuellement (nom de l'exécutable, ex: overwatch)",
+    "manualPlaceholder": "overwatch",
+    "manualAdd": "Ajouter",
+    "generalHint": "Aucune appli sélectionnée = pack général, toujours actif."
   },
   "grid": {
     "addSound": "Ajouter un son",

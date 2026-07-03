@@ -2,16 +2,19 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAppStore } from '../store/appStore'
 import { PromptModal } from './PromptModal'
+import { AppPickerModal } from './AppPickerModal'
 
 export function Sidebar(): React.JSX.Element {
   const { t } = useTranslation()
   const soundboards = useAppStore((s) => s.soundboards)
   const selectedBoardId = useAppStore((s) => s.selectedBoardId)
+  const activeBoardIds = useAppStore((s) => s.activeBoardIds)
   const selectBoard = useAppStore((s) => s.selectBoard)
   const applyState = useAppStore((s) => s.applyState)
 
   const [creating, setCreating] = useState(false)
   const [renamingBoard, setRenamingBoard] = useState<{ id: string; name: string } | null>(null)
+  const [appsBoardId, setAppsBoardId] = useState<string | null>(null)
 
   async function handleCreateConfirm(name: string): Promise<void> {
     setCreating(false)
@@ -58,29 +61,43 @@ export function Sidebar(): React.JSX.Element {
       </div>
       {soundboards.length === 0 && <p className="empty-hint">{t('sidebar.noBoards')}</p>}
       <ul className="board-list">
-        {soundboards.map((board) => (
-          <li key={board.id} className={board.id === selectedBoardId ? 'active' : ''}>
-            <button className="board-name" onClick={() => selectBoard(board.id)}>
-              {board.name}
-            </button>
-            <div className="board-item-actions">
-              <button title={t('sidebar.rename')} onClick={() => setRenamingBoard({ id: board.id, name: board.name })}>
-                ✎
+        {soundboards.map((board) => {
+          const apps = board.appMatchers ?? []
+          const isActive = activeBoardIds.has(board.id)
+          return (
+            <li key={board.id} className={board.id === selectedBoardId ? 'active' : ''}>
+              <button className="board-name" onClick={() => selectBoard(board.id)}>
+                <span>{board.name}</span>
+                <span className="board-badge">
+                  {isActive && <span className="active-dot" title={t('sidebar.appsActiveNow')} />}
+                  {apps.length === 0 ? t('sidebar.appsGeneral') : apps.join(', ')}
+                </span>
               </button>
-              <button
-                title={t('sidebar.export')}
-                onClick={async () => {
-                  await window.api.exportSoundboard(board.id)
-                }}
-              >
-                ⬇
-              </button>
-              <button title={t('sidebar.delete')} onClick={() => handleDelete(board.id)}>
-                ✕
-              </button>
-            </div>
-          </li>
-        ))}
+              <div className="board-item-actions">
+                <button title={t('sidebar.apps')} onClick={() => setAppsBoardId(board.id)}>
+                  🎮
+                </button>
+                <button
+                  title={t('sidebar.rename')}
+                  onClick={() => setRenamingBoard({ id: board.id, name: board.name })}
+                >
+                  ✎
+                </button>
+                <button
+                  title={t('sidebar.export')}
+                  onClick={async () => {
+                    await window.api.exportSoundboard(board.id)
+                  }}
+                >
+                  ⬇
+                </button>
+                <button title={t('sidebar.delete')} onClick={() => handleDelete(board.id)}>
+                  ✕
+                </button>
+              </div>
+            </li>
+          )
+        })}
       </ul>
 
       {creating && (
@@ -101,6 +118,15 @@ export function Sidebar(): React.JSX.Element {
           confirmLabel={t('modal.save')}
           onCancel={() => setRenamingBoard(null)}
           onConfirm={handleRenameConfirm}
+        />
+      )}
+
+      {appsBoardId && (
+        <AppPickerModal
+          soundboardId={appsBoardId}
+          initialApps={soundboards.find((b) => b.id === appsBoardId)?.appMatchers ?? []}
+          onClose={() => setAppsBoardId(null)}
+          onSaved={applyState}
         />
       )}
     </aside>

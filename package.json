@@ -13,6 +13,7 @@
     "dist:win": "electron-vite build && electron-builder --win"
   },
   "dependencies": {
+    "active-win": "^8.2.1",
     "adm-zip": "^0.5.10",
     "electron-store": "^8.2.0",
     "i18next": "^23.11.5",

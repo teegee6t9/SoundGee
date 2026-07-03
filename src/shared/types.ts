@@ -11,6 +11,8 @@ export interface Soundboard {
   id: string
   name: string
   sounds: Sound[]
+  /** Normalized (lowercase, no ".exe") process names this pack is scoped to. Empty/undefined = general pack, always active. */
+  appMatchers?: string[]
 }
 
 export type Language = 'fr' | 'en'
