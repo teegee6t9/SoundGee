@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useAppStore } from '../store/appStore'
+import { PromptModal } from './PromptModal'
 
 export function Sidebar(): React.JSX.Element {
   const { t } = useTranslation()
@@ -8,19 +10,25 @@ export function Sidebar(): React.JSX.Element {
   const selectBoard = useAppStore((s) => s.selectBoard)
   const applyState = useAppStore((s) => s.applyState)
 
-  async function handleCreate(): Promise<void> {
-    const name = window.prompt(t('sidebar.newBoardPrompt'))
-    if (!name || !name.trim()) return
-    const state = await window.api.createSoundboard(name.trim())
+  const [creating, setCreating] = useState(false)
+  const [renamingBoard, setRenamingBoard] = useState<{ id: string; name: string } | null>(null)
+
+  async function handleCreateConfirm(name: string): Promise<void> {
+    setCreating(false)
+    const state = await window.api.createSoundboard(name)
     applyState(state)
     const created = state.soundboards[state.soundboards.length - 1]
     if (created) selectBoard(created.id)
   }
 
-  async function handleRename(id: string, currentName: string): Promise<void> {
-    const name = window.prompt(t('sidebar.renameBoardPrompt'), currentName)
-    if (!name || !name.trim() || name.trim() === currentName) return
-    const state = await window.api.renameSoundboard(id, name.trim())
+  async function handleRenameConfirm(name: string): Promise<void> {
+    if (!renamingBoard || name === renamingBoard.name) {
+      setRenamingBoard(null)
+      return
+    }
+    const id = renamingBoard.id
+    setRenamingBoard(null)
+    const state = await window.api.renameSoundboard(id, name)
     applyState(state)
   }
 
@@ -45,7 +53,7 @@ export function Sidebar(): React.JSX.Element {
         <h1>{t('app.title')}</h1>
       </div>
       <div className="sidebar-actions">
-        <button onClick={handleCreate}>+ {t('sidebar.newSoundboard')}</button>
+        <button onClick={() => setCreating(true)}>+ {t('sidebar.newSoundboard')}</button>
         <button onClick={handleImportPack}>{t('sidebar.import')}</button>
       </div>
       {soundboards.length === 0 && <p className="empty-hint">{t('sidebar.noBoards')}</p>}
@@ -56,7 +64,7 @@ export function Sidebar(): React.JSX.Element {
               {board.name}
             </button>
             <div className="board-item-actions">
-              <button title={t('sidebar.rename')} onClick={() => handleRename(board.id, board.name)}>
+              <button title={t('sidebar.rename')} onClick={() => setRenamingBoard({ id: board.id, name: board.name })}>
                 ✎
               </button>
               <button
@@ -74,6 +82,27 @@ export function Sidebar(): React.JSX.Element {
           </li>
         ))}
       </ul>
+
+      {creating && (
+        <PromptModal
+          title={t('sidebar.newSoundboard')}
+          label={t('sidebar.newBoardPrompt')}
+          confirmLabel={t('modal.create')}
+          onCancel={() => setCreating(false)}
+          onConfirm={handleCreateConfirm}
+        />
+      )}
+
+      {renamingBoard && (
+        <PromptModal
+          title={t('sidebar.rename')}
+          label={t('sidebar.renameBoardPrompt')}
+          initialValue={renamingBoard.name}
+          confirmLabel={t('modal.save')}
+          onCancel={() => setRenamingBoard(null)}
+          onConfirm={handleRenameConfirm}
+        />
+      )}
     </aside>
   )
 }
