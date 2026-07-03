@@ -31,6 +31,12 @@ export default function App(): React.JSX.Element {
     })
   }, [])
 
+  useEffect(() => {
+    return window.api.onActiveBoardsChanged((ids) => {
+      useAppStore.getState().setActiveBoardIds(ids)
+    })
+  }, [])
+
   if (!loaded) {
     return (
       <div className="app-loading">

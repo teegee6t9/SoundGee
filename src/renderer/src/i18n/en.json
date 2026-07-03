@@ -3,15 +3,29 @@
     "title": "SoundGee"
   },
   "sidebar": {
-    "newSoundboard": "New soundboard",
+    "newSoundboard": "New pack",
     "rename": "Rename",
     "delete": "Delete",
     "export": "Export",
     "import": "Import pack",
-    "confirmDeleteBoard": "Delete this soundboard and all its sounds?",
-    "noBoards": "No soundboards yet. Create one to get started.",
-    "newBoardPrompt": "Soundboard name",
-    "renameBoardPrompt": "New name"
+    "confirmDeleteBoard": "Delete this pack and all its sounds?",
+    "noBoards": "No packs yet. Create one to get started.",
+    "newBoardPrompt": "Pack name",
+    "renameBoardPrompt": "New name",
+    "apps": "Applications",
+    "appsGeneral": "General",
+    "appsActiveNow": "Active now"
+  },
+  "apps": {
+    "title": "Associated applications",
+    "hint": "This pack is only active (hotkeys usable) while one of these applications is in the foreground, in addition to general packs which stay always active.",
+    "running": "Currently running applications",
+    "refresh": "Refresh",
+    "noneFound": "No window detected. Launch the app then click Refresh, or add it manually below.",
+    "manualLabel": "Add manually (executable name, e.g. overwatch)",
+    "manualPlaceholder": "overwatch",
+    "manualAdd": "Add",
+    "generalHint": "No app selected = general pack, always active."
   },
   "grid": {
     "addSound": "Add sound",

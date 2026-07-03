@@ -37,7 +37,13 @@ const CODE_TO_KEY: Record<string, string> = {
 
 function codeToKey(code: string, key: string): string | null {
   if (code in CODE_TO_KEY) return CODE_TO_KEY[code]
-  if (/^Key[A-Z]$/.test(code)) return code.slice(3)
+  if (/^Key[A-Z]$/.test(code)) {
+    // `code` is the physical position named after a US QWERTY layout (e.g. AZERTY's "A"
+    // key reports as "KeyQ"). Prefer the actual character produced so the recorded
+    // accelerator matches the letter printed on the user's key, not its QWERTY position.
+    if (/^[a-zA-Z]$/.test(key)) return key.toUpperCase()
+    return code.slice(3)
+  }
   if (/^Digit[0-9]$/.test(code)) return code.slice(5)
   if (/^F([1-9]|1[0-9]|2[0-4])$/.test(code)) return code
   if (/^Numpad[0-9]$/.test(code)) return `num${code.slice(6)}`

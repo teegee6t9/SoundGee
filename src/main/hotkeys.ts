@@ -1,7 +1,6 @@
 import { globalShortcut, BrowserWindow } from 'electron'
 import type { HotkeyResult, HotkeyTriggeredPayload } from '../shared/types'
 import { IPC } from '../shared/ipcChannels'
-import { getSoundboards } from './store'
 
 const acceleratorToSound = new Map<string, HotkeyTriggeredPayload>()
 const soundToAccelerator = new Map<string, string>()
@@ -47,14 +46,8 @@ export function unregisterHotkey(soundboardId: string, soundId: string): void {
   }
 }
 
-export function registerAllFromStore(win: BrowserWindow): void {
-  for (const board of getSoundboards()) {
-    for (const sound of board.sounds) {
-      if (sound.hotkey) {
-        registerHotkey(win, board.id, sound.id, sound.hotkey)
-      }
-    }
-  }
+export function getRegisteredSoundKeys(): Set<string> {
+  return new Set(soundToAccelerator.keys())
 }
 
 export function unregisterAll(): void {

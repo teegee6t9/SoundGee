@@ -15,13 +15,10 @@ import {
   findSoundboard,
   findSound
 } from './store'
-import {
-  registerHotkey as registerHotkeyGlobal,
-  unregisterHotkey as unregisterHotkeyGlobal,
-  registerAllFromStore,
-  unregisterAll
-} from './hotkeys'
+import { registerHotkey as registerHotkeyGlobal, unregisterHotkey as unregisterHotkeyGlobal, unregisterAll } from './hotkeys'
 import { exportSoundboard, importSoundboardPack } from './pack'
+import { startAppWatcher, stopAppWatcher, listRunningApps } from './appWatcher'
+import { reconcileHotkeys, setActiveBoardsListener, getActiveBoardIds, findStaticConflict } from './appScope'
 import { IPC } from '../shared/ipcChannels'
 import { setQuitting, isQuitting } from './appState'
 import type { Language } from '../shared/types'
@@ -64,7 +61,14 @@ app.whenReady().then(() => {
 
   mainWindow = createMainWindow()
   createTray(mainWindow, getSettings().language)
-  registerAllFromStore(mainWindow)
+
+  setActiveBoardsListener((ids) => {
+    mainWindow?.webContents.send(IPC.ACTIVE_BOARDS_CHANGED, ids)
+  })
+  reconcileHotkeys(mainWindow, null)
+  startAppWatcher((processName) => {
+    if (mainWindow) reconcileHotkeys(mainWindow, processName)
+  })
 
   mainWindow.on('close', (event) => {
     if (!isQuitting) {
@@ -85,7 +89,10 @@ app.whenReady().then(() => {
 })
 
 app.on('before-quit', () => setQuitting(true))
-app.on('will-quit', () => unregisterAll())
+app.on('will-quit', () => {
+  stopAppWatcher()
+  unregisterAll()
+})
 app.on('window-all-closed', () => {
   // Intentionally no-op: SoundGee keeps running via the tray while gaming.
 })
@@ -196,12 +203,16 @@ function registerIpcHandlers(): void {
 
   ipcMain.handle(IPC.REGISTER_HOTKEY, (_e, soundboardId: string, soundId: string, accelerator: string) => {
     if (!mainWindow) return { ok: false, error: 'no-window', state: getState() }
+    const boards = getSoundboards()
+    if (findStaticConflict(boards, soundboardId, accelerator, soundId)) {
+      return { ok: false, error: 'conflict', state: getState() }
+    }
     const result = registerHotkeyGlobal(mainWindow, soundboardId, soundId, accelerator)
     if (result.ok) {
-      const boards = getSoundboards()
       const board = findSoundboard(boards, soundboardId)
       findSound(board, soundId).hotkey = accelerator
       setSoundboards(boards)
+      reconcileHotkeys(mainWindow)
     }
     return { ...result, state: getState() }
   })
@@ -214,6 +225,18 @@ function registerIpcHandlers(): void {
     setSoundboards(boards)
     return getState()
   })
+
+  ipcMain.handle(IPC.APPS_LIST_RUNNING, () => listRunningApps())
+
+  ipcMain.handle(IPC.UPDATE_BOARD_APPS, (_e, soundboardId: string, appMatchers: string[]) => {
+    const boards = getSoundboards()
+    findSoundboard(boards, soundboardId).appMatchers = appMatchers
+    setSoundboards(boards)
+    if (mainWindow) reconcileHotkeys(mainWindow)
+    return getState()
+  })
+
+  ipcMain.handle(IPC.GET_ACTIVE_BOARDS, () => getActiveBoardIds())
 
   ipcMain.handle(IPC.EXPORT_SOUNDBOARD, async (_e, soundboardId: string) => {
     if (!mainWindow) return { ok: false }

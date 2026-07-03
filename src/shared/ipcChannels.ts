@@ -13,5 +13,9 @@ export const IPC = {
   UNREGISTER_HOTKEY: 'hotkey:unregister',
   HOTKEY_TRIGGERED: 'hotkey:triggered',
   EXPORT_SOUNDBOARD: 'pack:export',
-  IMPORT_SOUNDBOARD: 'pack:import'
+  IMPORT_SOUNDBOARD: 'pack:import',
+  APPS_LIST_RUNNING: 'apps:list-running',
+  UPDATE_BOARD_APPS: 'soundboard:update-apps',
+  GET_ACTIVE_BOARDS: 'active-boards:get',
+  ACTIVE_BOARDS_CHANGED: 'active-boards:changed'
 } as const

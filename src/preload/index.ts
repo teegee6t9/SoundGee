@@ -43,7 +43,18 @@ const api = {
 
   exportSoundboard: (soundboardId: string): Promise<{ ok: boolean; path?: string }> =>
     ipcRenderer.invoke(IPC.EXPORT_SOUNDBOARD, soundboardId),
-  importSoundboardPack: (): Promise<AppState | null> => ipcRenderer.invoke(IPC.IMPORT_SOUNDBOARD)
+  importSoundboardPack: (): Promise<AppState | null> => ipcRenderer.invoke(IPC.IMPORT_SOUNDBOARD),
+
+  listRunningApps: (): Promise<{ processName: string; title: string }[]> =>
+    ipcRenderer.invoke(IPC.APPS_LIST_RUNNING),
+  updateSoundboardApps: (soundboardId: string, appMatchers: string[]): Promise<AppState> =>
+    ipcRenderer.invoke(IPC.UPDATE_BOARD_APPS, soundboardId, appMatchers),
+  getActiveBoards: (): Promise<string[]> => ipcRenderer.invoke(IPC.GET_ACTIVE_BOARDS),
+  onActiveBoardsChanged: (callback: (ids: string[]) => void): (() => void) => {
+    const listener = (_e: Electron.IpcRendererEvent, ids: string[]): void => callback(ids)
+    ipcRenderer.on(IPC.ACTIVE_BOARDS_CHANGED, listener)
+    return () => ipcRenderer.removeListener(IPC.ACTIVE_BOARDS_CHANGED, listener)
+  }
 }
 
 contextBridge.exposeInMainWorld('api', api)

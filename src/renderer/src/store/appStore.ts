@@ -5,10 +5,12 @@ interface AppStore {
   soundboards: Soundboard[]
   settings: Settings
   selectedBoardId: string | null
+  activeBoardIds: Set<string>
   loaded: boolean
   load: () => Promise<void>
   applyState: (state: AppState) => void
   selectBoard: (id: string) => void
+  setActiveBoardIds: (ids: string[]) => void
 }
 
 const emptySettings: Settings = { language: 'en', outputDeviceIds: [], masterVolume: 1 }
@@ -17,11 +19,12 @@ export const useAppStore = create<AppStore>((set, get) => ({
   soundboards: [],
   settings: emptySettings,
   selectedBoardId: null,
+  activeBoardIds: new Set(),
   loaded: false,
   load: async () => {
-    const state = await window.api.getState()
+    const [state, activeBoardIds] = await Promise.all([window.api.getState(), window.api.getActiveBoards()])
     get().applyState(state)
-    set({ loaded: true })
+    set({ loaded: true, activeBoardIds: new Set(activeBoardIds) })
   },
   applyState: (state: AppState) => {
     set((prev) => {
@@ -33,5 +36,6 @@ export const useAppStore = create<AppStore>((set, get) => ({
       }
     })
   },
-  selectBoard: (id: string) => set({ selectedBoardId: id })
+  selectBoard: (id: string) => set({ selectedBoardId: id }),
+  setActiveBoardIds: (ids: string[]) => set({ activeBoardIds: new Set(ids) })
 }))
