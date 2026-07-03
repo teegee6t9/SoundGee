@@ -1,0 +1,17 @@
+export const IPC = {
+  GET_STATE: 'state:get',
+  CREATE_SOUNDBOARD: 'soundboard:create',
+  RENAME_SOUNDBOARD: 'soundboard:rename',
+  DELETE_SOUNDBOARD: 'soundboard:delete',
+  PICK_AUDIO_FILE: 'sound:pick-file',
+  ADD_SOUND_FROM_FILE: 'sound:add-from-file',
+  ADD_SOUND_FROM_URL: 'sound:add-from-url',
+  UPDATE_SOUND: 'sound:update',
+  DELETE_SOUND: 'sound:delete',
+  UPDATE_SETTINGS: 'settings:update',
+  REGISTER_HOTKEY: 'hotkey:register',
+  UNREGISTER_HOTKEY: 'hotkey:unregister',
+  HOTKEY_TRIGGERED: 'hotkey:triggered',
+  EXPORT_SOUNDBOARD: 'pack:export',
+  IMPORT_SOUNDBOARD: 'pack:import'
+} as const

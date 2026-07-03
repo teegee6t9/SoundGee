@@ -1,0 +1,70 @@
+{
+  "app": {
+    "title": "SoundGee"
+  },
+  "sidebar": {
+    "newSoundboard": "Nouveau soundboard",
+    "rename": "Renommer",
+    "delete": "Supprimer",
+    "export": "Exporter",
+    "import": "Importer un pack",
+    "confirmDeleteBoard": "Supprimer ce soundboard et tous ses sons ?",
+    "noBoards": "Aucun soundboard pour l'instant. Crées-en un pour commencer.",
+    "newBoardPrompt": "Nom du soundboard",
+    "renameBoardPrompt": "Nouveau nom"
+  },
+  "grid": {
+    "addSound": "Ajouter un son",
+    "noSounds": "Aucun son pour l'instant. Clique sur \"Ajouter un son\" pour en importer un."
+  },
+  "sound": {
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "confirmDeleteSound": "Supprimer ce son ?",
+    "name": "Nom",
+    "color": "Couleur",
+    "volume": "Volume",
+    "hotkey": "Raccourci"
+  },
+  "modal": {
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "create": "Créer"
+  },
+  "import": {
+    "title": "Ajouter un son",
+    "localFile": "Fichier local",
+    "chooseFile": "Choisir un fichier...",
+    "noFileChosen": "Aucun fichier choisi",
+    "orUrl": "Ou une URL directe vers un fichier audio",
+    "urlPlaceholder": "https://exemple.com/son.mp3",
+    "name": "Nom",
+    "namePlaceholder": "Nom du son",
+    "submit": "Ajouter",
+    "downloading": "Téléchargement..."
+  },
+  "hotkey": {
+    "record": "Cliquer pour enregistrer",
+    "pressKey": "Appuie sur une combinaison de touches...",
+    "clear": "Effacer",
+    "conflict": "Ce raccourci est déjà utilisé par une autre application ou un autre son."
+  },
+  "settings": {
+    "title": "Réglages",
+    "language": "Langue",
+    "outputDevices": "Sorties audio",
+    "outputDevicesHint": "Sélectionne tous les périphériques sur lesquels les sons doivent jouer en même temps (ex : tes haut-parleurs et un câble virtuel pour que les autres t'entendent aussi).",
+    "masterVolume": "Volume principal",
+    "audioGuide": "Comment faire entendre tes sons aux autres",
+    "close": "Fermer"
+  },
+  "guide": {
+    "title": "Guide de configuration audio",
+    "intro": "Par défaut, les sons ne jouent que sur tes propres haut-parleurs. Pour que les autres les entendent aussi (Discord, vocal en jeu...), il faut un câble audio virtuel gratuit vers lequel SoundGee peut envoyer le son en même temps que vers tes haut-parleurs.",
+    "step1": "1. Installe VB-CABLE (gratuit) depuis vb-audio.com, et redémarre ton ordinateur si demandé.",
+    "step2": "2. Dans les Réglages de SoundGee, coche \"CABLE Input (VB-Audio Virtual Cable)\" dans Sorties audio, en plus de tes haut-parleurs normaux.",
+    "step3": "3. Dans Discord (ou ton jeu), règle ton micro/périphérique d'entrée sur \"CABLE Output (VB-Audio Virtual Cable)\".",
+    "step4": "4. Pour pouvoir quand même parler en utilisant le soundboard, utilise un mixeur gratuit comme Voicemeeter pour combiner ton vrai micro et VB-CABLE en une seule entrée.",
+    "linkLabel": "Ouvrir vb-audio.com"
+  }
+}
