@@ -74,6 +74,13 @@ export function AudioSetupGuide({ onClose, currentOutputDeviceIds, onApplied }: 
       {status === 'not-installed' && (
         <>
           <p>{t('audioSetup.notInstalled')}</p>
+          <ol className="guide-steps">
+            <li>{t('audioSetup.installStep1')}</li>
+            <li>{t('audioSetup.installStep2')}</li>
+            <li>{t('audioSetup.installStep3')}</li>
+            <li>{t('audioSetup.installStep4')}</li>
+            <li>{t('audioSetup.installStep5')}</li>
+          </ol>
           <div className="modal-footer" style={{ justifyContent: 'flex-start' }}>
             <button type="button" className="primary" onClick={handleDownload} disabled={downloading}>
               {downloading ? t('audioSetup.downloading') : t('audioSetup.downloadButton')}
@@ -82,7 +89,6 @@ export function AudioSetupGuide({ onClose, currentOutputDeviceIds, onApplied }: 
               {t('audioSetup.recheckButton')}
             </button>
           </div>
-          <p className="hint">{t('audioSetup.installNote')}</p>
           {downloadError && (
             <p className="error-text">
               {t('audioSetup.downloadError')}{' '}
