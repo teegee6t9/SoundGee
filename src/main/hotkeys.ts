@@ -50,8 +50,30 @@ export function getRegisteredSoundKeys(): Set<string> {
   return new Set(soundToAccelerator.keys())
 }
 
+let masterAccelerator: string | null = null
+
+export function registerMasterHotkey(accelerator: string, onTrigger: () => void): HotkeyResult {
+  if (masterAccelerator === accelerator) return { ok: true }
+  if (globalShortcut.isRegistered(accelerator)) {
+    return { ok: false, error: 'conflict' }
+  }
+  const success = globalShortcut.register(accelerator, onTrigger)
+  if (!success) return { ok: false, error: 'register-failed' }
+  if (masterAccelerator) globalShortcut.unregister(masterAccelerator)
+  masterAccelerator = accelerator
+  return { ok: true }
+}
+
+export function unregisterMasterHotkey(): void {
+  if (masterAccelerator) {
+    globalShortcut.unregister(masterAccelerator)
+    masterAccelerator = null
+  }
+}
+
 export function unregisterAll(): void {
   globalShortcut.unregisterAll()
   acceleratorToSound.clear()
   soundToAccelerator.clear()
+  masterAccelerator = null
 }

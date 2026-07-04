@@ -24,7 +24,13 @@ const api = {
     ipcRenderer.invoke(IPC.DELETE_SOUND, soundboardId, soundId),
 
   updateSettings: (
-    patch: Partial<{ language: Language; outputDeviceIds: string[]; masterVolume: number }>
+    patch: Partial<{
+      language: Language
+      outputDeviceIds: string[]
+      masterVolume: number
+      launchAtStartup: boolean
+      launchMinimized: boolean
+    }>
   ): Promise<AppState> => ipcRenderer.invoke(IPC.UPDATE_SETTINGS, patch),
 
   registerHotkey: (
@@ -54,6 +60,26 @@ const api = {
     const listener = (_e: Electron.IpcRendererEvent, ids: string[]): void => callback(ids)
     ipcRenderer.on(IPC.ACTIVE_BOARDS_CHANGED, listener)
     return () => ipcRenderer.removeListener(IPC.ACTIVE_BOARDS_CHANGED, listener)
+  },
+
+  minimizeWindow: (): void => ipcRenderer.send(IPC.WINDOW_MINIMIZE),
+  closeWindow: (): void => ipcRenderer.send(IPC.WINDOW_CLOSE),
+
+  onUpdateReady: (callback: () => void): (() => void) => {
+    const listener = (): void => callback()
+    ipcRenderer.on(IPC.UPDATE_READY, listener)
+    return () => ipcRenderer.removeListener(IPC.UPDATE_READY, listener)
+  },
+  installUpdate: (): void => ipcRenderer.send(IPC.INSTALL_UPDATE),
+
+  registerMasterHotkey: (accelerator: string): Promise<HotkeyResult & { state: AppState }> =>
+    ipcRenderer.invoke(IPC.REGISTER_MASTER_HOTKEY, accelerator),
+  unregisterMasterHotkey: (): Promise<AppState> => ipcRenderer.invoke(IPC.UNREGISTER_MASTER_HOTKEY),
+  toggleSoundboardsEnabled: (): Promise<AppState> => ipcRenderer.invoke(IPC.TOGGLE_SOUNDBOARDS),
+  onSoundboardsEnabledChanged: (callback: (enabled: boolean) => void): (() => void) => {
+    const listener = (_e: Electron.IpcRendererEvent, enabled: boolean): void => callback(enabled)
+    ipcRenderer.on(IPC.SOUNDBOARDS_ENABLED_CHANGED, listener)
+    return () => ipcRenderer.removeListener(IPC.SOUNDBOARDS_ENABLED_CHANGED, listener)
   }
 }
 

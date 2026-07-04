@@ -70,7 +70,13 @@
     "outputDevicesHint": "Select every device the sounds should play through at once (e.g. your speakers and a virtual cable so others hear it too).",
     "masterVolume": "Master volume",
     "audioGuide": "How to make others hear your sounds",
-    "close": "Close"
+    "close": "Close",
+    "launchAtStartup": "Launch at Windows startup",
+    "launchMinimized": "Start in background (without opening the window)",
+    "masterToggleHotkey": "Shortcut to enable/disable all sounds",
+    "soundsEnabledOn": "Sounds currently active",
+    "soundsEnabledOff": "Sounds currently disabled",
+    "toggleNow": "Toggle now"
   },
   "guide": {
     "title": "Audio setup guide",
@@ -80,5 +86,16 @@
     "step3": "3. In Discord (or your game), set your Microphone/Input device to \"CABLE Output (VB-Audio Virtual Cable)\".",
     "step4": "4. To still talk while using the soundboard, use a free mixer like Voicemeeter to combine your real microphone and VB-CABLE into a single input device.",
     "linkLabel": "Open vb-audio.com"
+  },
+  "titlebar": {
+    "minimize": "Minimize",
+    "close": "Close",
+    "soundsOn": "Sounds active",
+    "soundsOff": "Sounds disabled"
+  },
+  "update": {
+    "ready": "Update ready",
+    "restart": "Restart now",
+    "later": "Later"
   }
 }

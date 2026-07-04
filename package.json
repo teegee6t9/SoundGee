@@ -10,12 +10,14 @@
     "build": "electron-vite build",
     "start": "electron-vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
-    "dist:win": "electron-vite build && electron-builder --win"
+    "dist:win": "electron-vite build && electron-builder --win",
+    "release:win": "electron-vite build && electron-builder --win --publish always"
   },
   "dependencies": {
     "active-win": "^8.2.1",
     "adm-zip": "^0.5.10",
     "electron-store": "^8.2.0",
+    "electron-updater": "^6.8.9",
     "i18next": "^23.11.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

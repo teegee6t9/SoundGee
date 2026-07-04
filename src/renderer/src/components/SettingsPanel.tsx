@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Modal } from './Modal'
+import { HotkeyRecorder } from './HotkeyRecorder'
 import { useAppStore } from '../store/appStore'
 import { listOutputDevices, type OutputDevice } from '../audio/devices'
 import { AudioSetupGuide } from './AudioSetupGuide'
@@ -37,6 +38,21 @@ export function SettingsPanel({ onClose }: Props): React.JSX.Element {
 
   async function handleMasterVolume(volume: number): Promise<void> {
     const state = await window.api.updateSettings({ masterVolume: volume })
+    applyState(state)
+  }
+
+  async function toggleLaunchAtStartup(): Promise<void> {
+    const state = await window.api.updateSettings({ launchAtStartup: !settings.launchAtStartup })
+    applyState(state)
+  }
+
+  async function toggleLaunchMinimized(): Promise<void> {
+    const state = await window.api.updateSettings({ launchMinimized: !settings.launchMinimized })
+    applyState(state)
+  }
+
+  async function handleToggleSoundboards(): Promise<void> {
+    const state = await window.api.toggleSoundboardsEnabled()
     applyState(state)
   }
 
@@ -85,6 +101,42 @@ export function SettingsPanel({ onClose }: Props): React.JSX.Element {
             </li>
           ))}
         </ul>
+      </div>
+
+      <div className="form-row">
+        <label>
+          <input type="checkbox" checked={settings.launchAtStartup} onChange={toggleLaunchAtStartup} />{' '}
+          {t('settings.launchAtStartup')}
+        </label>
+      </div>
+
+      <div className="form-row">
+        <label>
+          <input type="checkbox" checked={settings.launchMinimized} onChange={toggleLaunchMinimized} />{' '}
+          {t('settings.launchMinimized')}
+        </label>
+      </div>
+
+      <div className="form-row">
+        <label>{t('settings.masterToggleHotkey')}</label>
+        <HotkeyRecorder
+          value={settings.masterToggleHotkey}
+          onChange={async (accelerator) => {
+            const result = await window.api.registerMasterHotkey(accelerator)
+            if (result.ok) applyState(result.state)
+            return result
+          }}
+          onClear={async () => {
+            const state = await window.api.unregisterMasterHotkey()
+            applyState(state)
+          }}
+        />
+        <div className="lang-switch">
+          <span className="hint">{settings.soundboardsEnabled ? t('settings.soundsEnabledOn') : t('settings.soundsEnabledOff')}</span>
+          <button type="button" onClick={handleToggleSoundboards}>
+            {t('settings.toggleNow')}
+          </button>
+        </div>
       </div>
 
       <div className="form-row">

@@ -2,13 +2,14 @@ import { BrowserWindow, shell } from 'electron'
 import { join } from 'path'
 import { getIconPath } from './resources'
 
-export function createMainWindow(): BrowserWindow {
+export function createMainWindow(startMinimized: boolean): BrowserWindow {
   const win = new BrowserWindow({
     width: 1100,
     height: 720,
     minWidth: 820,
     minHeight: 560,
     show: false,
+    frame: false,
     autoHideMenuBar: true,
     icon: getIconPath('icon.png'),
     webPreferences: {
@@ -19,7 +20,11 @@ export function createMainWindow(): BrowserWindow {
     }
   })
 
-  win.on('ready-to-show', () => win.show())
+  win.on('ready-to-show', () => {
+    if (startMinimized) return
+    win.maximize()
+    win.show()
+  })
 
   win.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)

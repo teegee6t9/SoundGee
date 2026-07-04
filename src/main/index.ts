@@ -15,10 +15,17 @@ import {
   findSoundboard,
   findSound
 } from './store'
-import { registerHotkey as registerHotkeyGlobal, unregisterHotkey as unregisterHotkeyGlobal, unregisterAll } from './hotkeys'
+import {
+  registerHotkey as registerHotkeyGlobal,
+  unregisterHotkey as unregisterHotkeyGlobal,
+  registerMasterHotkey,
+  unregisterMasterHotkey,
+  unregisterAll
+} from './hotkeys'
 import { exportSoundboard, importSoundboardPack } from './pack'
 import { startAppWatcher, stopAppWatcher, listRunningApps } from './appWatcher'
 import { reconcileHotkeys, setActiveBoardsListener, getActiveBoardIds, findStaticConflict } from './appScope'
+import { initAutoUpdater, installUpdateNow } from './updater'
 import { IPC } from '../shared/ipcChannels'
 import { setQuitting, isQuitting } from './appState'
 import type { Language } from '../shared/types'
@@ -46,6 +53,20 @@ function safeUnlinkSound(fileName: string): void {
   }
 }
 
+function applyLoginItemSettings(enabled: boolean): void {
+  if (!app.isPackaged) return
+  app.setLoginItemSettings({ openAtLogin: enabled })
+}
+
+function toggleSoundboardsEnabled(): void {
+  const settings = { ...getSettings(), soundboardsEnabled: !getSettings().soundboardsEnabled }
+  setSettings(settings)
+  if (mainWindow) {
+    reconcileHotkeys(mainWindow)
+    mainWindow.webContents.send(IPC.SOUNDBOARDS_ENABLED_CHANGED, settings.soundboardsEnabled)
+  }
+}
+
 app.whenReady().then(() => {
   protocol.handle('sgsound', async (request) => {
     const filePath = resolveSoundPath(request.url)
@@ -59,8 +80,10 @@ app.whenReady().then(() => {
     callback(permission === 'media')
   })
 
-  mainWindow = createMainWindow()
-  createTray(mainWindow, getSettings().language)
+  const settings = getSettings()
+  mainWindow = createMainWindow(settings.launchMinimized)
+  createTray(mainWindow, settings.language)
+  applyLoginItemSettings(settings.launchAtStartup)
 
   setActiveBoardsListener((ids) => {
     mainWindow?.webContents.send(IPC.ACTIVE_BOARDS_CHANGED, ids)
@@ -69,6 +92,12 @@ app.whenReady().then(() => {
   startAppWatcher((processName) => {
     if (mainWindow) reconcileHotkeys(mainWindow, processName)
   })
+
+  if (settings.masterToggleHotkey) {
+    registerMasterHotkey(settings.masterToggleHotkey, toggleSoundboardsEnabled)
+  }
+
+  initAutoUpdater(mainWindow)
 
   mainWindow.on('close', (event) => {
     if (!isQuitting) {
@@ -81,7 +110,7 @@ app.whenReady().then(() => {
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      mainWindow = createMainWindow()
+      mainWindow = createMainWindow(false)
     } else {
       mainWindow?.show()
     }
@@ -193,10 +222,20 @@ function registerIpcHandlers(): void {
 
   ipcMain.handle(
     IPC.UPDATE_SETTINGS,
-    (_e, patch: Partial<{ language: Language; outputDeviceIds: string[]; masterVolume: number }>) => {
+    (
+      _e,
+      patch: Partial<{
+        language: Language
+        outputDeviceIds: string[]
+        masterVolume: number
+        launchAtStartup: boolean
+        launchMinimized: boolean
+      }>
+    ) => {
       const settings = { ...getSettings(), ...patch }
       setSettings(settings)
       if (mainWindow) updateTrayMenu(mainWindow, settings.language)
+      if (patch.launchAtStartup !== undefined) applyLoginItemSettings(settings.launchAtStartup)
       return getState()
     }
   )
@@ -246,5 +285,28 @@ function registerIpcHandlers(): void {
   ipcMain.handle(IPC.IMPORT_SOUNDBOARD, async () => {
     if (!mainWindow) return null
     return importSoundboardPack(mainWindow)
+  })
+
+  ipcMain.on(IPC.WINDOW_MINIMIZE, () => mainWindow?.minimize())
+  ipcMain.on(IPC.WINDOW_CLOSE, () => mainWindow?.close())
+  ipcMain.on(IPC.INSTALL_UPDATE, () => installUpdateNow())
+
+  ipcMain.handle(IPC.REGISTER_MASTER_HOTKEY, (_e, accelerator: string) => {
+    const result = registerMasterHotkey(accelerator, toggleSoundboardsEnabled)
+    if (result.ok) {
+      setSettings({ ...getSettings(), masterToggleHotkey: accelerator })
+    }
+    return { ...result, state: getState() }
+  })
+
+  ipcMain.handle(IPC.UNREGISTER_MASTER_HOTKEY, () => {
+    unregisterMasterHotkey()
+    setSettings({ ...getSettings(), masterToggleHotkey: undefined })
+    return getState()
+  })
+
+  ipcMain.handle(IPC.TOGGLE_SOUNDBOARDS, () => {
+    toggleSoundboardsEnabled()
+    return getState()
   })
 }

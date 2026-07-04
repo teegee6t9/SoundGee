@@ -17,5 +17,13 @@ export const IPC = {
   APPS_LIST_RUNNING: 'apps:list-running',
   UPDATE_BOARD_APPS: 'soundboard:update-apps',
   GET_ACTIVE_BOARDS: 'active-boards:get',
-  ACTIVE_BOARDS_CHANGED: 'active-boards:changed'
+  ACTIVE_BOARDS_CHANGED: 'active-boards:changed',
+  WINDOW_MINIMIZE: 'window:minimize',
+  WINDOW_CLOSE: 'window:close',
+  UPDATE_READY: 'app-update:ready',
+  INSTALL_UPDATE: 'app-update:install',
+  REGISTER_MASTER_HOTKEY: 'hotkey:register-master',
+  UNREGISTER_MASTER_HOTKEY: 'hotkey:unregister-master',
+  TOGGLE_SOUNDBOARDS: 'soundboards:toggle-enabled',
+  SOUNDBOARDS_ENABLED_CHANGED: 'soundboards:enabled-changed'
 } as const
