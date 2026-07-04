@@ -4,19 +4,34 @@ import fs from 'fs'
 import path from 'path'
 import type { ConfigureResult } from '../shared/types'
 
-// Direct download link confirmed working against VB-Audio's official host. It embeds a version
-// number (v2122) that will go stale whenever VB-Audio ships a new Voicemeeter release - if the
-// fetch fails, fall back to opening the product page so the user can grab the current link.
-const VOICEMEETER_ZIP_URL = 'https://download.vb-audio.com/Download_CABLE/VoicemeeterSetup_v2122.zip'
 const VOICEMEETER_PAGE_URL = 'https://vb-audio.com/Voicemeeter/banana.htm'
+// Last-known-good direct link, used only if the page can't be reached or its markup no longer
+// contains a matching URL. It embeds a version number (v2122) that will go stale whenever
+// VB-Audio ships a new Voicemeeter release.
+const FALLBACK_ZIP_URL = 'https://download.vb-audio.com/Download_CABLE/VoicemeeterSetup_v2122.zip'
 
 export function openVoicemeeterDownloadPage(): void {
   shell.openExternal(VOICEMEETER_PAGE_URL)
 }
 
+/** Scrapes the official download page for the current zip URL, so we always grab whatever
+ * version VB-Audio is currently shipping instead of a hardcoded one that ages out. */
+async function findCurrentDownloadUrl(): Promise<string | null> {
+  try {
+    const res = await fetch(VOICEMEETER_PAGE_URL)
+    if (!res.ok) return null
+    const html = await res.text()
+    const match = html.match(/https:\/\/download\.vb-audio\.com\/Download_CABLE\/VoicemeeterSetup_v[\d.]+\.zip/i)
+    return match?.[0] ?? null
+  } catch {
+    return null
+  }
+}
+
 export async function downloadAndLaunchVoicemeeterInstaller(): Promise<ConfigureResult> {
   try {
-    const res = await fetch(VOICEMEETER_ZIP_URL)
+    const zipUrl = (await findCurrentDownloadUrl()) ?? FALLBACK_ZIP_URL
+    const res = await fetch(zipUrl)
     if (!res.ok) {
       openVoicemeeterDownloadPage()
       return { ok: false, error: 'download-failed' }
