@@ -97,5 +97,27 @@
     "ready": "Mise à jour prête",
     "restart": "Redémarrer maintenant",
     "later": "Plus tard"
+  },
+  "audioSetup": {
+    "title": "Faire entendre tes sons aux autres",
+    "checking": "Vérification de Voicemeeter...",
+    "notInstalled": "Il te faut Voicemeeter (gratuit) pour mixer ton micro avec les sons de SoundGee, afin que Discord ou tes jeux entendent les deux à la fois.",
+    "downloadButton": "Télécharger Voicemeeter Banana",
+    "recheckButton": "J'ai terminé l'installation, vérifier à nouveau",
+    "installNote": "Un redémarrage peut être demandé après l'installation. Reviens ici ensuite pour finir la configuration.",
+    "installedIntro": "Voicemeeter est détecté ! Un clic pour tout configurer automatiquement (mixage micro + sons).",
+    "configureButton": "Configurer automatiquement",
+    "configuring": "Configuration en cours...",
+    "successTitle": "Configuré !",
+    "successStep": "Dernière étape, à faire toi-même (aucune appli tierce ne permet de l'automatiser) : dans Discord → Réglages → Voix et vidéo → Périphérique d'entrée → choisis \"Voicemeeter Output\".",
+    "errorNotInstalled": "Voicemeeter ne semble plus détecté. Réessaie après l'installation.",
+    "errorLogin": "Impossible de se connecter à Voicemeeter. Assure-toi qu'il est bien installé, puis réessaie.",
+    "errorLaunch": "Voicemeeter n'a pas pu être lancé automatiquement. Ouvre-le une fois toi-même, puis réessaie.",
+    "advancedToggle": "Solution alternative (VB-CABLE, avancé)"
+  },
+  "whatsNew": {
+    "title": "Nouveautés de la version {{version}}",
+    "noNotes": "Merci d'utiliser SoundGee !",
+    "ok": "Compris !"
   }
 }

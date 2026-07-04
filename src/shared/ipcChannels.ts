@@ -25,5 +25,9 @@ export const IPC = {
   REGISTER_MASTER_HOTKEY: 'hotkey:register-master',
   UNREGISTER_MASTER_HOTKEY: 'hotkey:unregister-master',
   TOGGLE_SOUNDBOARDS: 'soundboards:toggle-enabled',
-  SOUNDBOARDS_ENABLED_CHANGED: 'soundboards:enabled-changed'
+  SOUNDBOARDS_ENABLED_CHANGED: 'soundboards:enabled-changed',
+  GET_APP_VERSION: 'app:get-version',
+  CHECK_VOICEMEETER_INSTALLED: 'voicemeeter:check-installed',
+  INSTALL_VOICEMEETER: 'voicemeeter:install',
+  CONFIGURE_VOICEMEETER_MIXING: 'voicemeeter:configure-mixing'
 } as const

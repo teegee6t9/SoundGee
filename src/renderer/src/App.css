@@ -42,12 +42,28 @@ button:hover {
   border-color: var(--accent);
 }
 
-button.primary {
+.btn-link {
+  display: inline-block;
+  text-decoration: none;
+  font-family: inherit;
+  cursor: pointer;
+  background: var(--bg-elevated);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.btn-link:hover {
+  border-color: var(--accent);
+}
+
+.primary {
   background: var(--accent);
   border-color: var(--accent);
 }
 
-button.primary:hover {
+.primary:hover {
   background: var(--accent-hover);
 }
 

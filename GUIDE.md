@@ -45,16 +45,16 @@ Utile si tu as beaucoup de sons/raccourcis et que tu veux éviter les collisions
 
 ### 6. Faire entendre tes sons aux autres (Discord, vocal en jeu...)
 
-Par défaut, un son ne joue que sur tes propres haut-parleurs — toi seul l'entends. Pour que les autres t'entendent aussi en vocal :
+Par défaut, un son ne joue que sur tes propres haut-parleurs — toi seul l'entends. SoundGee peut automatiser presque toute la configuration pour que les autres t'entendent aussi en vocal, avec un seul outil gratuit (Voicemeeter) :
 
-1. **Installe VB-CABLE** (gratuit) : [vb-audio.com/Cable](https://vb-audio.com/Cable/). Lance l'installeur, redémarre si demandé.
-2. **Dans SoundGee** : Réglages (icône ⚙ en haut à droite) → Sorties audio → coche **"CABLE Input (VB-Audio Virtual Cable)"** en plus de tes haut-parleurs habituels. Désormais, chaque son joue sur les deux en même temps.
-3. **Dans Discord** (ou ton jeu) : Réglages → Voix et vidéo → Périphérique d'entrée → sélectionne **"CABLE Output (VB-Audio Virtual Cable)"**.
-4. À ce stade, Discord entend SoundGee, mais plus ta voix (un seul périphérique d'entrée à la fois). Pour parler ET jouer des sons en même temps :
-   - Installe **[Voicemeeter](https://vb-audio.com/Voicemeeter/)** (gratuit, du même éditeur que VB-CABLE).
-   - Configure Voicemeeter pour mixer ton vrai micro + VB-CABLE en une seule sortie virtuelle (le logiciel fournit un guide de prise en main à l'installation).
-   - Dans Discord, choisis la sortie de Voicemeeter comme périphérique d'entrée à la place de VB-CABLE directement.
-5. Ce guide est aussi accessible directement dans l'appli : Réglages → "Comment faire entendre tes sons aux autres".
+1. Ouvre **Réglages** (icône ⚙) → **"Comment faire entendre tes sons aux autres"**.
+2. Si Voicemeeter n'est pas détecté : clique **"Télécharger Voicemeeter Banana"**, installe-le (redémarre si demandé), puis reviens et clique **"J'ai terminé l'installation, vérifier à nouveau"**.
+3. Une fois détecté, clique **"Configurer automatiquement"** — SoundGee lance Voicemeeter et configure le mixage micro + sons tout seul, plus besoin de toucher à l'interface de Voicemeeter.
+4. Dernière étape, à faire toi-même (aucune appli ne peut le faire à ta place) : dans **Discord** (ou ton jeu) → Réglages → Voix et vidéo → Périphérique d'entrée → choisis **"Voicemeeter Output"**.
+
+C'est tout : Discord entend maintenant ta voix ET les sons de SoundGee, mixés ensemble.
+
+**Solution alternative (VB-CABLE)** : si tu préfères l'ancienne méthode manuelle (VB-CABLE seul, sans Voicemeeter), elle reste disponible dans la section "Solution alternative" du même écran — pratique si tu as déjà VB-CABLE installé et configuré.
 
 ### 7. Astuces
 
@@ -105,16 +105,16 @@ Useful if you have lots of sounds/hotkeys and want to avoid collisions between d
 
 ### 6. Making others hear your sounds (Discord, in-game voice...)
 
-By default, a sound only plays on your own speakers — only you hear it. To have others hear it too in voice chat:
+By default, a sound only plays on your own speakers — only you hear it. SoundGee can automate almost the entire setup so others can hear you too, with a single free tool (Voicemeeter):
 
-1. **Install VB-CABLE** (free): [vb-audio.com/Cable](https://vb-audio.com/Cable/). Run the installer, restart if prompted.
-2. **In SoundGee**: Settings (⚙ icon top right) → Audio outputs → check **"CABLE Input (VB-Audio Virtual Cable)"** in addition to your usual speakers. From now on, every sound plays on both at once.
-3. **In Discord** (or your game): Settings → Voice & Video → Input Device → select **"CABLE Output (VB-Audio Virtual Cable)"**.
-4. At this point Discord hears SoundGee, but no longer your voice (only one input device at a time). To talk AND play sounds at the same time:
-   - Install **[Voicemeeter](https://vb-audio.com/Voicemeeter/)** (free, same publisher as VB-CABLE).
-   - Configure Voicemeeter to mix your real mic + VB-CABLE into a single virtual output (the app provides a setup guide on install).
-   - In Discord, pick Voicemeeter's output as the input device instead of VB-CABLE directly.
-5. This guide is also available directly in the app: Settings → "How to make others hear your sounds".
+1. Open **Settings** (⚙ icon) → **"Make others hear your sounds"**.
+2. If Voicemeeter isn't detected: click **"Download Voicemeeter Banana"**, install it (restart if prompted), then come back and click **"I've finished installing it, check again"**.
+3. Once detected, click **"Configure automatically"** — SoundGee launches Voicemeeter and sets up the mic + sounds mixing on its own, no need to touch Voicemeeter's own interface.
+4. Last step, done by hand (no app can do this for you): in **Discord** (or your game) → Settings → Voice & Video → Input Device → choose **"Voicemeeter Output"**.
+
+That's it: Discord now hears both your voice AND SoundGee's sounds, mixed together.
+
+**Alternative solution (VB-CABLE)**: if you prefer the older manual method (VB-CABLE alone, without Voicemeeter), it's still available under "Alternative solution" on the same screen — handy if you already have VB-CABLE installed and configured.
 
 ### 7. Tips
 

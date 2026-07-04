@@ -10,7 +10,11 @@ const defaultSettings: Settings = {
   masterVolume: 1,
   launchAtStartup: false,
   launchMinimized: false,
-  soundboardsEnabled: true
+  soundboardsEnabled: true,
+  // On a brand new install this matches the running version, so no "what's new" popup fires.
+  // Existing installs upgrading from an older version keep their persisted (older) value here,
+  // which is what makes the popup trigger on the first launch after an update.
+  lastSeenVersion: app.getVersion()
 }
 
 const store = new Store<AppState>({

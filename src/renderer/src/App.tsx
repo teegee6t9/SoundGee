@@ -5,6 +5,7 @@ import { TitleBar } from './components/TitleBar'
 import { Sidebar } from './components/Sidebar'
 import { SoundGrid } from './components/SoundGrid'
 import { SettingsPanel } from './components/SettingsPanel'
+import { WhatsNewModal } from './components/WhatsNewModal'
 import { useAppStore } from './store/appStore'
 import { playSound } from './audio/playback'
 import './App.css'
@@ -14,8 +15,10 @@ export default function App(): React.JSX.Element {
   const load = useAppStore((s) => s.load)
   const loaded = useAppStore((s) => s.loaded)
   const settings = useAppStore((s) => s.settings)
+  const applyState = useAppStore((s) => s.applyState)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [updateReady, setUpdateReady] = useState(false)
+  const [whatsNewVersion, setWhatsNewVersion] = useState<string | null>(null)
 
   useEffect(() => {
     load()
@@ -48,6 +51,20 @@ export default function App(): React.JSX.Element {
   useEffect(() => {
     return window.api.onUpdateReady(() => setUpdateReady(true))
   }, [])
+
+  useEffect(() => {
+    if (!loaded) return
+    window.api.getAppVersion().then((version) => {
+      if (version !== useAppStore.getState().settings.lastSeenVersion) setWhatsNewVersion(version)
+    })
+  }, [loaded])
+
+  async function dismissWhatsNew(): Promise<void> {
+    if (!whatsNewVersion) return
+    const state = await window.api.updateSettings({ lastSeenVersion: whatsNewVersion })
+    applyState(state)
+    setWhatsNewVersion(null)
+  }
 
   if (!loaded) {
     return (
@@ -82,6 +99,7 @@ export default function App(): React.JSX.Element {
           <button onClick={() => setUpdateReady(false)}>{t('update.later')}</button>
         </div>
       )}
+      {whatsNewVersion && <WhatsNewModal version={whatsNewVersion} onClose={dismissWhatsNew} />}
     </div>
   )
 }

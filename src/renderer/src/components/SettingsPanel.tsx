@@ -145,7 +145,13 @@ export function SettingsPanel({ onClose }: Props): React.JSX.Element {
         </button>
       </div>
 
-      {guideOpen && <AudioSetupGuide onClose={() => setGuideOpen(false)} />}
+      {guideOpen && (
+        <AudioSetupGuide
+          onClose={() => setGuideOpen(false)}
+          currentOutputDeviceIds={settings.outputDeviceIds}
+          onApplied={applyState}
+        />
+      )}
     </Modal>
   )
 }
