@@ -19,6 +19,8 @@ export function AudioSetupGuide({ onClose, currentOutputDeviceIds, onApplied }: 
   const [configureError, setConfigureError] = useState<string | null>(null)
   const [configured, setConfigured] = useState(false)
   const [showAdvanced, setShowAdvanced] = useState(false)
+  const [downloading, setDownloading] = useState(false)
+  const [downloadError, setDownloadError] = useState(false)
 
   async function refreshStatus(): Promise<void> {
     setStatus('checking')
@@ -29,6 +31,17 @@ export function AudioSetupGuide({ onClose, currentOutputDeviceIds, onApplied }: 
   useEffect(() => {
     refreshStatus()
   }, [])
+
+  async function handleDownload(): Promise<void> {
+    setDownloading(true)
+    setDownloadError(false)
+    try {
+      const result = await window.api.installVoicemeeter()
+      if (!result.ok) setDownloadError(true)
+    } finally {
+      setDownloading(false)
+    }
+  }
 
   async function handleConfigure(): Promise<void> {
     setConfiguring(true)
@@ -61,20 +74,29 @@ export function AudioSetupGuide({ onClose, currentOutputDeviceIds, onApplied }: 
       {status === 'not-installed' && (
         <>
           <p>{t('audioSetup.notInstalled')}</p>
+          <ol className="guide-steps">
+            <li>{t('audioSetup.installStep1')}</li>
+            <li>{t('audioSetup.installStep2')}</li>
+            <li>{t('audioSetup.installStep3')}</li>
+            <li>{t('audioSetup.installStep4')}</li>
+            <li>{t('audioSetup.installStep5')}</li>
+          </ol>
           <div className="modal-footer" style={{ justifyContent: 'flex-start' }}>
-            <a
-              href="https://vb-audio.com/Voicemeeter/banana.htm"
-              target="_blank"
-              rel="noreferrer"
-              className="btn-link primary"
-            >
-              {t('audioSetup.downloadButton')}
-            </a>
+            <button type="button" className="primary" onClick={handleDownload} disabled={downloading}>
+              {downloading ? t('audioSetup.downloading') : t('audioSetup.downloadButton')}
+            </button>
             <button type="button" onClick={refreshStatus}>
               {t('audioSetup.recheckButton')}
             </button>
           </div>
-          <p className="hint">{t('audioSetup.installNote')}</p>
+          {downloadError && (
+            <p className="error-text">
+              {t('audioSetup.downloadError')}{' '}
+              <a href="https://vb-audio.com/Voicemeeter/banana.htm" target="_blank" rel="noreferrer">
+                {t('audioSetup.downloadErrorLink')}
+              </a>
+            </p>
+          )}
         </>
       )}
 

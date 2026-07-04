@@ -48,7 +48,11 @@ Utile si tu as beaucoup de sons/raccourcis et que tu veux éviter les collisions
 Par défaut, un son ne joue que sur tes propres haut-parleurs — toi seul l'entends. SoundGee peut automatiser presque toute la configuration pour que les autres t'entendent aussi en vocal, avec un seul outil gratuit (Voicemeeter) :
 
 1. Ouvre **Réglages** (icône ⚙) → **"Comment faire entendre tes sons aux autres"**.
-2. Si Voicemeeter n'est pas détecté : clique **"Télécharger Voicemeeter Banana"**, installe-le (redémarre si demandé), puis reviens et clique **"J'ai terminé l'installation, vérifier à nouveau"**.
+2. Si Voicemeeter n'est pas détecté, clique **"Télécharger et installer Voicemeeter Banana"** : SoundGee télécharge le fichier et lance l'installeur tout seul. Ensuite :
+   - Windows va demander une autorisation (droits administrateur) → accepte.
+   - L'installeur de Voicemeeter s'ouvre dans sa propre fenêtre → clique "Suivant"/"Install" comme pour n'importe quel logiciel (ça, je ne peux pas l'automatiser).
+   - Windows demandera probablement de redémarrer ton PC (installation d'un pilote audio) → redémarre.
+   - Rouvre SoundGee, reviens sur cet écran, clique **"J'ai terminé l'installation, vérifier à nouveau"**.
 3. Une fois détecté, clique **"Configurer automatiquement"** — SoundGee lance Voicemeeter et configure le mixage micro + sons tout seul, plus besoin de toucher à l'interface de Voicemeeter.
 4. Dernière étape, à faire toi-même (aucune appli ne peut le faire à ta place) : dans **Discord** (ou ton jeu) → Réglages → Voix et vidéo → Périphérique d'entrée → choisis **"Voicemeeter Output"**.
 
@@ -108,7 +112,11 @@ Useful if you have lots of sounds/hotkeys and want to avoid collisions between d
 By default, a sound only plays on your own speakers — only you hear it. SoundGee can automate almost the entire setup so others can hear you too, with a single free tool (Voicemeeter):
 
 1. Open **Settings** (⚙ icon) → **"Make others hear your sounds"**.
-2. If Voicemeeter isn't detected: click **"Download Voicemeeter Banana"**, install it (restart if prompted), then come back and click **"I've finished installing it, check again"**.
+2. If Voicemeeter isn't detected, click **"Download and install Voicemeeter Banana"**: SoundGee downloads the file and launches the installer on its own. Then:
+   - Windows will ask for permission (administrator rights) → accept.
+   - Voicemeeter's installer opens in its own window → click "Next"/"Install" like any other software (that part can't be automated).
+   - Windows will likely ask to restart your PC (it installs an audio driver) → restart.
+   - Reopen SoundGee, come back to this screen, click **"I've finished installing it, check again"**.
 3. Once detected, click **"Configure automatically"** — SoundGee launches Voicemeeter and sets up the mic + sounds mixing on its own, no need to touch Voicemeeter's own interface.
 4. Last step, done by hand (no app can do this for you): in **Discord** (or your game) → Settings → Voice & Video → Input Device → choose **"Voicemeeter Output"**.
 
