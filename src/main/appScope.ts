@@ -1,6 +1,6 @@
 import type { BrowserWindow } from 'electron'
 import type { Soundboard } from '../shared/types'
-import { getSoundboards } from './store'
+import { getSoundboards, getSettings } from './store'
 import { registerHotkey, unregisterHotkey, getRegisteredSoundKeys } from './hotkeys'
 
 let lastActiveBoardIds: Set<string> = new Set()
@@ -60,7 +60,7 @@ export function findStaticConflict(
 export function reconcileHotkeys(win: BrowserWindow, foregroundProcess: string | null = lastForegroundProcess): void {
   lastForegroundProcess = foregroundProcess
   const boards = getSoundboards()
-  const activeBoardIds = computeActiveBoardIds(boards, foregroundProcess)
+  const activeBoardIds = getSettings().soundboardsEnabled ? computeActiveBoardIds(boards, foregroundProcess) : new Set<string>()
   const registeredKeys = getRegisteredSoundKeys()
 
   for (const board of boards) {

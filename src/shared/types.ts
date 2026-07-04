@@ -21,6 +21,10 @@ export interface Settings {
   language: Language
   outputDeviceIds: string[]
   masterVolume: number
+  launchAtStartup: boolean
+  launchMinimized: boolean
+  soundboardsEnabled: boolean
+  masterToggleHotkey?: string
 }
 
 export interface AppState {

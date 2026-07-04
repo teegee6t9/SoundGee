@@ -11,9 +11,17 @@ interface AppStore {
   applyState: (state: AppState) => void
   selectBoard: (id: string) => void
   setActiveBoardIds: (ids: string[]) => void
+  setSoundboardsEnabled: (enabled: boolean) => void
 }
 
-const emptySettings: Settings = { language: 'en', outputDeviceIds: [], masterVolume: 1 }
+const emptySettings: Settings = {
+  language: 'en',
+  outputDeviceIds: [],
+  masterVolume: 1,
+  launchAtStartup: false,
+  launchMinimized: false,
+  soundboardsEnabled: true
+}
 
 export const useAppStore = create<AppStore>((set, get) => ({
   soundboards: [],
@@ -37,5 +45,7 @@ export const useAppStore = create<AppStore>((set, get) => ({
     })
   },
   selectBoard: (id: string) => set({ selectedBoardId: id }),
-  setActiveBoardIds: (ids: string[]) => set({ activeBoardIds: new Set(ids) })
+  setActiveBoardIds: (ids: string[]) => set({ activeBoardIds: new Set(ids) }),
+  setSoundboardsEnabled: (enabled: boolean) =>
+    set((prev) => ({ settings: { ...prev.settings, soundboardsEnabled: enabled } }))
 }))

@@ -4,7 +4,14 @@ import path from 'path'
 import fs from 'fs'
 import type { AppState, Soundboard, Sound, Settings } from '../shared/types'
 
-const defaultSettings: Settings = { language: 'en', outputDeviceIds: [], masterVolume: 1 }
+const defaultSettings: Settings = {
+  language: 'en',
+  outputDeviceIds: [],
+  masterVolume: 1,
+  launchAtStartup: false,
+  launchMinimized: false,
+  soundboardsEnabled: true
+}
 
 const store = new Store<AppState>({
   defaults: { soundboards: [], settings: defaultSettings }
@@ -17,7 +24,7 @@ export function getSoundsDir(): string {
 }
 
 export function getState(): AppState {
-  return { soundboards: store.get('soundboards'), settings: store.get('settings') }
+  return { soundboards: getSoundboards(), settings: getSettings() }
 }
 
 export function getSoundboards(): Soundboard[] {
@@ -29,7 +36,9 @@ export function setSoundboards(boards: Soundboard[]): void {
 }
 
 export function getSettings(): Settings {
-  return store.get('settings')
+  // Merge with defaults so settings persisted by older versions (missing newer fields) don't
+  // end up with `undefined` for booleans that must default to a specific value.
+  return { ...defaultSettings, ...store.get('settings') }
 }
 
 export function setSettings(settings: Settings): void {

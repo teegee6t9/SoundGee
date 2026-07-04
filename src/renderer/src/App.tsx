@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import './i18n'
+import { TitleBar } from './components/TitleBar'
 import { Sidebar } from './components/Sidebar'
 import { SoundGrid } from './components/SoundGrid'
 import { SettingsPanel } from './components/SettingsPanel'
@@ -9,11 +10,12 @@ import { playSound } from './audio/playback'
 import './App.css'
 
 export default function App(): React.JSX.Element {
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const load = useAppStore((s) => s.load)
   const loaded = useAppStore((s) => s.loaded)
   const settings = useAppStore((s) => s.settings)
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const [updateReady, setUpdateReady] = useState(false)
 
   useEffect(() => {
     load()
@@ -37,6 +39,16 @@ export default function App(): React.JSX.Element {
     })
   }, [])
 
+  useEffect(() => {
+    return window.api.onSoundboardsEnabledChanged((enabled) => {
+      useAppStore.getState().setSoundboardsEnabled(enabled)
+    })
+  }, [])
+
+  useEffect(() => {
+    return window.api.onUpdateReady(() => setUpdateReady(true))
+  }, [])
+
   if (!loaded) {
     return (
       <div className="app-loading">
@@ -46,18 +58,30 @@ export default function App(): React.JSX.Element {
   }
 
   return (
-    <div className="app">
-      <Sidebar />
-      <div className="main-column">
-        <header className="topbar">
-          <div />
-          <button className="settings-btn" onClick={() => setSettingsOpen(true)} aria-label="settings">
-            ⚙
-          </button>
-        </header>
-        <SoundGrid />
+    <div className="app-shell">
+      <TitleBar />
+      <div className="app">
+        <Sidebar />
+        <div className="main-column">
+          <header className="topbar">
+            <div />
+            <button className="settings-btn" onClick={() => setSettingsOpen(true)} aria-label="settings">
+              ⚙
+            </button>
+          </header>
+          <SoundGrid />
+        </div>
+        {settingsOpen && <SettingsPanel onClose={() => setSettingsOpen(false)} />}
       </div>
-      {settingsOpen && <SettingsPanel onClose={() => setSettingsOpen(false)} />}
+      {updateReady && (
+        <div className="update-banner">
+          <span>{t('update.ready')}</span>
+          <button className="primary" onClick={() => window.api.installUpdate()}>
+            {t('update.restart')}
+          </button>
+          <button onClick={() => setUpdateReady(false)}>{t('update.later')}</button>
+        </div>
+      )}
     </div>
   )
 }
