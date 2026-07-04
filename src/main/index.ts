@@ -27,6 +27,7 @@ import { startAppWatcher, stopAppWatcher, listRunningApps } from './appWatcher'
 import { reconcileHotkeys, setActiveBoardsListener, getActiveBoardIds, findStaticConflict } from './appScope'
 import { initAutoUpdater, installUpdateNow } from './updater'
 import { isVoicemeeterInstalled, configureMicAndSoundboardMix } from './voicemeeter'
+import { downloadAndLaunchVoicemeeterInstaller } from './audioInstaller'
 import { IPC } from '../shared/ipcChannels'
 import { setQuitting, isQuitting } from './appState'
 import type { Language } from '../shared/types'
@@ -317,4 +318,6 @@ function registerIpcHandlers(): void {
   ipcMain.handle(IPC.CHECK_VOICEMEETER_INSTALLED, () => isVoicemeeterInstalled())
 
   ipcMain.handle(IPC.CONFIGURE_VOICEMEETER_MIXING, () => configureMicAndSoundboardMix())
+
+  ipcMain.handle(IPC.INSTALL_VOICEMEETER, () => downloadAndLaunchVoicemeeterInstaller())
 }

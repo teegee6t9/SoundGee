@@ -85,7 +85,8 @@ const api = {
 
   getAppVersion: (): Promise<string> => ipcRenderer.invoke(IPC.GET_APP_VERSION),
   checkVoicemeeterInstalled: (): Promise<boolean> => ipcRenderer.invoke(IPC.CHECK_VOICEMEETER_INSTALLED),
-  configureVoicemeeterMixing: (): Promise<ConfigureResult> => ipcRenderer.invoke(IPC.CONFIGURE_VOICEMEETER_MIXING)
+  configureVoicemeeterMixing: (): Promise<ConfigureResult> => ipcRenderer.invoke(IPC.CONFIGURE_VOICEMEETER_MIXING),
+  installVoicemeeter: (): Promise<ConfigureResult> => ipcRenderer.invoke(IPC.INSTALL_VOICEMEETER)
 }
 
 contextBridge.exposeInMainWorld('api', api)

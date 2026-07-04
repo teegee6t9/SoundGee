@@ -49,5 +49,13 @@ export const CHANGELOG: Record<string, ChangelogEntry> = {
       'Simplified audio setup: automatic detection and configuration of Voicemeeter so others can hear you, no more manual routing.',
       'A "what\'s new" popup shown after each update.'
     ]
+  },
+  '2.2.1': {
+    fr: [
+      'Le téléchargement de Voicemeeter est maintenant automatique : un clic télécharge et lance l\'installeur directement, plus besoin de chercher le bon lien sur le site.'
+    ],
+    en: [
+      'Voicemeeter download is now automatic: one click downloads and launches the installer directly, no more hunting for the right link on the website.'
+    ]
   }
 }
