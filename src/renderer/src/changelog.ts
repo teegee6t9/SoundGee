@@ -57,5 +57,13 @@ export const CHANGELOG: Record<string, ChangelogEntry> = {
     en: [
       'Voicemeeter download is now automatic: one click downloads and launches the installer directly, no more hunting for the right link on the website.'
     ]
+  },
+  '2.2.2': {
+    fr: [
+      'Correction de plusieurs bugs de la configuration automatique Voicemeeter : le lancement automatique et la vérification de disponibilité suivent maintenant la méthode officielle documentée par VB-Audio, le bon micro/entrée virtuelle est ciblé (au lieu d\'une piste voisine), et tes haut-parleurs restent actifs en plus de Voicemeeter au lieu d\'être remplacés.'
+    ],
+    en: [
+      'Fixed several bugs in the automatic Voicemeeter setup: launching and readiness checks now follow VB-Audio\'s officially documented method, the correct mic/virtual input is targeted (instead of a neighboring one), and your speakers stay active alongside Voicemeeter instead of being replaced.'
+    ]
   }
 }
