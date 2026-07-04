@@ -26,6 +26,7 @@ import { exportSoundboard, importSoundboardPack } from './pack'
 import { startAppWatcher, stopAppWatcher, listRunningApps } from './appWatcher'
 import { reconcileHotkeys, setActiveBoardsListener, getActiveBoardIds, findStaticConflict } from './appScope'
 import { initAutoUpdater, installUpdateNow } from './updater'
+import { isVoicemeeterInstalled, configureMicAndSoundboardMix } from './voicemeeter'
 import { IPC } from '../shared/ipcChannels'
 import { setQuitting, isQuitting } from './appState'
 import type { Language } from '../shared/types'
@@ -230,6 +231,7 @@ function registerIpcHandlers(): void {
         masterVolume: number
         launchAtStartup: boolean
         launchMinimized: boolean
+        lastSeenVersion: string
       }>
     ) => {
       const settings = { ...getSettings(), ...patch }
@@ -309,4 +311,10 @@ function registerIpcHandlers(): void {
     toggleSoundboardsEnabled()
     return getState()
   })
+
+  ipcMain.handle(IPC.GET_APP_VERSION, () => app.getVersion())
+
+  ipcMain.handle(IPC.CHECK_VOICEMEETER_INSTALLED, () => isVoicemeeterInstalled())
+
+  ipcMain.handle(IPC.CONFIGURE_VOICEMEETER_MIXING, () => configureMicAndSoundboardMix())
 }

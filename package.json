@@ -1,6 +1,6 @@
 {
   "name": "soundgee",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "SoundGee - soundboard desktop app",
   "main": "./out/main/index.js",
   "author": "teegee6t9",
@@ -19,6 +19,7 @@
     "electron-store": "^8.2.0",
     "electron-updater": "^6.8.9",
     "i18next": "^23.11.5",
+    "koffi": "^3.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^14.1.2",

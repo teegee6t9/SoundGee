@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { IPC } from '../shared/ipcChannels'
-import type { AppState, HotkeyResult, HotkeyTriggeredPayload, Language } from '../shared/types'
+import type { AppState, ConfigureResult, HotkeyResult, HotkeyTriggeredPayload, Language } from '../shared/types'
 
 const api = {
   getState: (): Promise<AppState> => ipcRenderer.invoke(IPC.GET_STATE),
@@ -30,6 +30,7 @@ const api = {
       masterVolume: number
       launchAtStartup: boolean
       launchMinimized: boolean
+      lastSeenVersion: string
     }>
   ): Promise<AppState> => ipcRenderer.invoke(IPC.UPDATE_SETTINGS, patch),
 
@@ -80,7 +81,11 @@ const api = {
     const listener = (_e: Electron.IpcRendererEvent, enabled: boolean): void => callback(enabled)
     ipcRenderer.on(IPC.SOUNDBOARDS_ENABLED_CHANGED, listener)
     return () => ipcRenderer.removeListener(IPC.SOUNDBOARDS_ENABLED_CHANGED, listener)
-  }
+  },
+
+  getAppVersion: (): Promise<string> => ipcRenderer.invoke(IPC.GET_APP_VERSION),
+  checkVoicemeeterInstalled: (): Promise<boolean> => ipcRenderer.invoke(IPC.CHECK_VOICEMEETER_INSTALLED),
+  configureVoicemeeterMixing: (): Promise<ConfigureResult> => ipcRenderer.invoke(IPC.CONFIGURE_VOICEMEETER_MIXING)
 }
 
 contextBridge.exposeInMainWorld('api', api)

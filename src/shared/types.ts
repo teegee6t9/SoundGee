@@ -25,6 +25,7 @@ export interface Settings {
   launchMinimized: boolean
   soundboardsEnabled: boolean
   masterToggleHotkey?: string
+  lastSeenVersion?: string
 }
 
 export interface AppState {
@@ -40,4 +41,9 @@ export interface HotkeyResult {
 export interface HotkeyTriggeredPayload {
   soundboardId: string
   soundId: string
+}
+
+export interface ConfigureResult {
+  ok: boolean
+  error?: string
 }

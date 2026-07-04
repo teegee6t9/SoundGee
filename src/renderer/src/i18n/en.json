@@ -97,5 +97,27 @@
     "ready": "Update ready",
     "restart": "Restart now",
     "later": "Later"
+  },
+  "audioSetup": {
+    "title": "Make others hear your sounds",
+    "checking": "Checking for Voicemeeter...",
+    "notInstalled": "You need Voicemeeter (free) to mix your microphone with SoundGee's sounds, so Discord or your games hear both at once.",
+    "downloadButton": "Download Voicemeeter Banana",
+    "recheckButton": "I've finished installing it, check again",
+    "installNote": "A restart may be requested after installation. Come back here afterwards to finish the setup.",
+    "installedIntro": "Voicemeeter detected! One click to configure everything automatically (mic + sounds mixing).",
+    "configureButton": "Configure automatically",
+    "configuring": "Configuring...",
+    "successTitle": "Configured!",
+    "successStep": "Last step, done by hand (no third-party app lets us automate this): in Discord → Settings → Voice & Video → Input Device → choose \"Voicemeeter Output\".",
+    "errorNotInstalled": "Voicemeeter no longer appears to be detected. Try again after installing it.",
+    "errorLogin": "Couldn't connect to Voicemeeter. Make sure it's installed, then try again.",
+    "errorLaunch": "Voicemeeter couldn't be launched automatically. Open it yourself once, then try again.",
+    "advancedToggle": "Alternative solution (VB-CABLE, advanced)"
+  },
+  "whatsNew": {
+    "title": "What's new in version {{version}}",
+    "noNotes": "Thanks for using SoundGee!",
+    "ok": "Got it!"
   }
 }
