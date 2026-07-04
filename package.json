@@ -1,6 +1,6 @@
 {
   "name": "soundgee",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "SoundGee - soundboard desktop app",
   "main": "./out/main/index.js",
   "author": "teegee6t9",

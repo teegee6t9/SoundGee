@@ -54,14 +54,31 @@ export function AudioSetupGuide({ onClose, currentOutputDeviceIds, onApplied }: 
         return
       }
       const devices = await listOutputDevices()
-      const voicemeeterDevice = devices.find((d) => d.label.toLowerCase().includes('voicemeeter'))
-      if (voicemeeterDevice && !currentOutputDeviceIds.includes(voicemeeterDevice.deviceId)) {
+      // Voicemeeter Banana exposes several "Voicemeeter ..." playback devices (In 2, In 4, In
+      // 5, AUX Input...) besides the one we actually configured the mixing for - match it
+      // precisely, and drop any other voicemeeter device a previous run may have picked.
+      const voicemeeterDevice = devices.find((d) => {
+        const label = d.label.toLowerCase()
+        return label.includes('voicemeeter input') && !label.includes('aux')
+      })
+      if (voicemeeterDevice) {
+        const withoutOtherVoicemeeterDevices = currentOutputDeviceIds.filter((id) => {
+          const device = devices.find((d) => d.deviceId === id)
+          return !device || !device.label.toLowerCase().includes('voicemeeter')
+        })
+        // Keep "default" (your normal speakers/headphones) alongside Voicemeeter Input, so you
+        // still hear sounds yourself instead of only sending them to Voicemeeter.
+        const withDefault = withoutOtherVoicemeeterDevices.includes('default')
+          ? withoutOtherVoicemeeterDevices
+          : ['default', ...withoutOtherVoicemeeterDevices]
         const state = await window.api.updateSettings({
-          outputDeviceIds: [...currentOutputDeviceIds, voicemeeterDevice.deviceId]
+          outputDeviceIds: [...withDefault, voicemeeterDevice.deviceId]
         })
         onApplied(state)
       }
       setConfigured(true)
+    } catch {
+      setConfigureError('unknown')
     } finally {
       setConfiguring(false)
     }
@@ -108,6 +125,7 @@ export function AudioSetupGuide({ onClose, currentOutputDeviceIds, onApplied }: 
               {configuring ? t('audioSetup.configuring') : t('audioSetup.configureButton')}
             </button>
           </div>
+          {configuring && <p className="hint">{t('audioSetup.configuringHint')}</p>}
           {configureError && (
             <p className="error-text">
               {t(

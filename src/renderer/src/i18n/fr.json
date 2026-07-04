@@ -115,11 +115,12 @@
     "installedIntro": "Voicemeeter est détecté ! Un clic pour tout configurer automatiquement (mixage micro + sons).",
     "configureButton": "Configurer automatiquement",
     "configuring": "Configuration en cours...",
+    "configuringHint": "Ça peut prendre jusqu'à 15 secondes si c'est le premier lancement de Voicemeeter, patiente...",
     "successTitle": "Configuré !",
     "successStep": "Dernière étape, à faire toi-même (aucune appli tierce ne permet de l'automatiser) : dans Discord → Réglages → Voix et vidéo → Périphérique d'entrée → choisis \"Voicemeeter Output\".",
     "errorNotInstalled": "Voicemeeter ne semble plus détecté. Réessaie après l'installation.",
     "errorLogin": "Impossible de se connecter à Voicemeeter. Assure-toi qu'il est bien installé, puis réessaie.",
-    "errorLaunch": "Voicemeeter n'a pas pu être lancé automatiquement. Ouvre-le une fois toi-même, puis réessaie.",
+    "errorLaunch": "Voicemeeter n'a pas pu être lancé automatiquement après 15 secondes d'attente. Ouvre-le une fois toi-même depuis le menu Démarrer, attends que sa fenêtre s'affiche, puis reclique ici.",
     "advancedToggle": "Solution alternative (VB-CABLE, avancé)"
   },
   "whatsNew": {
