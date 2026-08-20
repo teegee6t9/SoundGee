@@ -121,7 +121,14 @@
     "errorNotInstalled": "Voicemeeter no longer appears to be detected. Try again after installing it.",
     "errorLogin": "Couldn't connect to Voicemeeter. Make sure it's installed, then try again.",
     "errorLaunch": "Voicemeeter couldn't be launched automatically after waiting 15 seconds. Open it yourself from the Start menu, wait for its window to appear, then click here again.",
-    "advancedToggle": "Alternative solution (VB-CABLE, advanced)"
+    "advancedToggle": "Alternative solution (VB-CABLE, advanced)",
+    "otherAudioToggle": "Share music/videos too (not just SoundGee)",
+    "otherAudioIntro": "Once Voicemeeter is configured, you can let your friends hear any sound from your PC - not just SoundGee's sounds - without connecting or installing anything else.",
+    "otherAudioStep1": "Open Windows Settings → System → Sound.",
+    "otherAudioStep2": "Scroll down to \"Advanced app volume options\" (or right-click the speaker icon in the taskbar → \"Volume mixer\").",
+    "otherAudioStep3": "Find the app playing the sound (your browser for YouTube, Spotify, VLC...) and set its output to \"Voicemeeter Input\" instead of your speakers.",
+    "otherAudioStep4": "That's it: this app is now mixed with everything else, heard by you and your friends in voice chat.",
+    "otherAudioHint": "This setting is per-app and stays active until you change it - remember to switch it back to your speakers when you no longer want to share that app."
   },
   "whatsNew": {
     "title": "What's new in version {{version}}",

@@ -121,7 +121,14 @@
     "errorNotInstalled": "Voicemeeter ne semble plus détecté. Réessaie après l'installation.",
     "errorLogin": "Impossible de se connecter à Voicemeeter. Assure-toi qu'il est bien installé, puis réessaie.",
     "errorLaunch": "Voicemeeter n'a pas pu être lancé automatiquement après 15 secondes d'attente. Ouvre-le une fois toi-même depuis le menu Démarrer, attends que sa fenêtre s'affiche, puis reclique ici.",
-    "advancedToggle": "Solution alternative (VB-CABLE, avancé)"
+    "advancedToggle": "Solution alternative (VB-CABLE, avancé)",
+    "otherAudioToggle": "Diffuser aussi de la musique/vidéos (pas juste SoundGee)",
+    "otherAudioIntro": "Une fois Voicemeeter configuré, tu peux faire entendre n'importe quel son de ton PC à tes potes — pas juste les sons de SoundGee — sans rien connecter ni installer en plus.",
+    "otherAudioStep1": "Ouvre les Réglages Windows → Système → Son.",
+    "otherAudioStep2": "Descends jusqu'à \"Options de volume avancées de l'application\" (ou clique droit sur l'icône du haut-parleur dans la barre des tâches → \"Mixeur de volume\").",
+    "otherAudioStep3": "Trouve l'appli qui joue le son (ton navigateur pour YouTube, Spotify, VLC...) et règle sa sortie sur \"Voicemeeter Input\" au lieu de tes haut-parleurs.",
+    "otherAudioStep4": "C'est tout : cette appli est maintenant mixée avec le reste, entendue par toi et par tes potes en vocal.",
+    "otherAudioHint": "Ce réglage est par application et reste actif tant que tu ne le changes pas — pense à le remettre sur tes haut-parleurs quand tu ne veux plus partager cette appli."
   },
   "whatsNew": {
     "title": "Nouveautés de la version {{version}}",

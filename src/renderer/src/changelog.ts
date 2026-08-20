@@ -65,5 +65,13 @@ export const CHANGELOG: Record<string, ChangelogEntry> = {
     en: [
       'Fixed several bugs in the automatic Voicemeeter setup: launching and readiness checks now follow VB-Audio\'s officially documented method, the correct mic/virtual input is targeted (instead of a neighboring one), and your speakers stay active alongside Voicemeeter instead of being replaced.'
     ]
+  },
+  '2.2.3': {
+    fr: [
+      'Nouveau guide dans l\'assistant audio : comment diffuser aussi de la musique ou une vidéo (Spotify, YouTube, VLC...) à tes potes, en plus des sons de SoundGee, via le routage audio par application de Windows.'
+    ],
+    en: [
+      'New guide in the audio wizard: how to also share music or a video (Spotify, YouTube, VLC...) with your friends, in addition to SoundGee\'s sounds, using Windows\' per-app audio routing.'
+    ]
   }
 }
