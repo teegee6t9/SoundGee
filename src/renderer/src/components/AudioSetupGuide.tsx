@@ -19,6 +19,7 @@ export function AudioSetupGuide({ onClose, currentOutputDeviceIds, onApplied }: 
   const [configureError, setConfigureError] = useState<string | null>(null)
   const [configured, setConfigured] = useState(false)
   const [showAdvanced, setShowAdvanced] = useState(false)
+  const [showOtherAudio, setShowOtherAudio] = useState(false)
   const [downloading, setDownloading] = useState(false)
   const [downloadError, setDownloadError] = useState(false)
 
@@ -141,6 +142,25 @@ export function AudioSetupGuide({ onClose, currentOutputDeviceIds, onApplied }: 
             <>
               <p className="hint">{t('audioSetup.successTitle')}</p>
               <p>{t('audioSetup.successStep')}</p>
+            </>
+          )}
+
+          <div className="form-row" style={{ marginTop: 16 }}>
+            <button type="button" onClick={() => setShowOtherAudio((v) => !v)}>
+              {t('audioSetup.otherAudioToggle')}
+            </button>
+          </div>
+
+          {showOtherAudio && (
+            <>
+              <p>{t('audioSetup.otherAudioIntro')}</p>
+              <ol className="guide-steps">
+                <li>{t('audioSetup.otherAudioStep1')}</li>
+                <li>{t('audioSetup.otherAudioStep2')}</li>
+                <li>{t('audioSetup.otherAudioStep3')}</li>
+                <li>{t('audioSetup.otherAudioStep4')}</li>
+              </ol>
+              <p className="hint">{t('audioSetup.otherAudioHint')}</p>
             </>
           )}
         </>

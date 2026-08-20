@@ -60,6 +60,17 @@ C'est tout : Discord entend maintenant ta voix ET les sons de SoundGee, mixés e
 
 **Solution alternative (VB-CABLE)** : si tu préfères l'ancienne méthode manuelle (VB-CABLE seul, sans Voicemeeter), elle reste disponible dans la section "Solution alternative" du même écran — pratique si tu as déjà VB-CABLE installé et configuré.
 
+### 6bis. Diffuser aussi de la musique ou une vidéo (Spotify, YouTube, VLC...)
+
+Une fois Voicemeeter configuré (étape précédente), tu peux faire entendre à tes potes **n'importe quel son de ton PC** — pas juste les sons de SoundGee — sans rien connecter ni installer en plus. Windows permet de choisir une sortie audio différente pour chaque application :
+
+1. Ouvre les **Réglages Windows → Système → Son**.
+2. Descends jusqu'à **"Options de volume avancées de l'application"** (ou clique droit sur l'icône du haut-parleur dans la barre des tâches → "Mixeur de volume").
+3. Trouve l'appli qui joue le son (ton navigateur pour YouTube, Spotify, VLC...) et règle sa sortie sur **"Voicemeeter Input"** au lieu de tes haut-parleurs.
+4. C'est tout : cette appli est maintenant mixée avec le reste, entendue par toi et par tes potes en vocal, exactement comme les sons de SoundGee.
+
+Ce réglage est par application et reste actif tant que tu ne le changes pas (utile pour Spotify/le navigateur ; à remettre sur tes haut-parleurs quand tu ne veux plus partager cette appli).
+
 ### 7. Astuces
 
 - SoundGee continue de tourner dans la zone de notification (tray) quand tu fermes la fenêtre — clique sur l'icône dans le tray pour la rouvrir, ou "Quitter" dans le menu du tray pour fermer complètement.
@@ -123,6 +134,17 @@ By default, a sound only plays on your own speakers — only you hear it. SoundG
 That's it: Discord now hears both your voice AND SoundGee's sounds, mixed together.
 
 **Alternative solution (VB-CABLE)**: if you prefer the older manual method (VB-CABLE alone, without Voicemeeter), it's still available under "Alternative solution" on the same screen — handy if you already have VB-CABLE installed and configured.
+
+### 6b. Sharing music or a video too (Spotify, YouTube, VLC...)
+
+Once Voicemeeter is configured (previous step), you can let your friends hear **any sound from your PC** - not just SoundGee's sounds - without connecting or installing anything else. Windows lets you pick a different audio output per application:
+
+1. Open **Windows Settings → System → Sound**.
+2. Scroll down to **"Advanced app volume options"** (or right-click the speaker icon in the taskbar → "Volume mixer").
+3. Find the app playing the sound (your browser for YouTube, Spotify, VLC...) and set its output to **"Voicemeeter Input"** instead of your speakers.
+4. That's it: this app is now mixed with everything else, heard by you and your friends in voice chat, just like SoundGee's sounds.
+
+This setting is per-app and stays active until you change it (handy for Spotify/your browser; switch it back to your speakers when you no longer want to share that app).
 
 ### 7. Tips
 
