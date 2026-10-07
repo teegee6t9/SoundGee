@@ -86,7 +86,17 @@ const api = {
   getAppVersion: (): Promise<string> => ipcRenderer.invoke(IPC.GET_APP_VERSION),
   checkVoicemeeterInstalled: (): Promise<boolean> => ipcRenderer.invoke(IPC.CHECK_VOICEMEETER_INSTALLED),
   configureVoicemeeterMixing: (): Promise<ConfigureResult> => ipcRenderer.invoke(IPC.CONFIGURE_VOICEMEETER_MIXING),
-  installVoicemeeter: (): Promise<ConfigureResult> => ipcRenderer.invoke(IPC.INSTALL_VOICEMEETER)
+  installVoicemeeter: (): Promise<ConfigureResult> => ipcRenderer.invoke(IPC.INSTALL_VOICEMEETER),
+
+  readSoundFile: (fileName: string): Promise<Uint8Array> => ipcRenderer.invoke(IPC.READ_SOUND_FILE, fileName),
+  saveTrimmedSound: (
+    soundboardId: string,
+    soundId: string,
+    wavData: ArrayBuffer,
+    asNewSound: boolean,
+    newName: string
+  ): Promise<AppState> =>
+    ipcRenderer.invoke(IPC.SAVE_TRIMMED_SOUND, soundboardId, soundId, wavData, asNewSound, newName)
 }
 
 contextBridge.exposeInMainWorld('api', api)

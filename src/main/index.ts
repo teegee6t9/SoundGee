@@ -320,4 +320,45 @@ function registerIpcHandlers(): void {
   ipcMain.handle(IPC.CONFIGURE_VOICEMEETER_MIXING, () => configureMicAndSoundboardMix())
 
   ipcMain.handle(IPC.INSTALL_VOICEMEETER, () => downloadAndLaunchVoicemeeterInstaller())
+
+  ipcMain.handle(IPC.READ_SOUND_FILE, async (_e, fileName: string) => {
+    // basename() so a crafted name can't escape the sounds folder
+    const filePath = path.join(getSoundsDir(), path.basename(fileName))
+    return fs.promises.readFile(filePath)
+  })
+
+  ipcMain.handle(
+    IPC.SAVE_TRIMMED_SOUND,
+    async (
+      _e,
+      soundboardId: string,
+      soundId: string,
+      data: ArrayBuffer | Uint8Array,
+      asNewSound: boolean,
+      newName: string
+    ) => {
+      const boards = getSoundboards()
+      const board = findSoundboard(boards, soundboardId)
+      const sound = findSound(board, soundId)
+
+      const fileName = `${uuid()}.wav`
+      await fs.promises.writeFile(path.join(getSoundsDir(), fileName), Buffer.from(data as ArrayBuffer))
+
+      if (asNewSound) {
+        board.sounds.push({
+          id: uuid(),
+          name: newName,
+          fileName,
+          volume: sound.volume,
+          color: sound.color
+        })
+      } else {
+        const oldFileName = sound.fileName
+        sound.fileName = fileName
+        safeUnlinkSound(oldFileName)
+      }
+      setSoundboards(boards)
+      return getState()
+    }
+  )
 }

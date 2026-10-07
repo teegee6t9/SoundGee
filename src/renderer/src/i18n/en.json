@@ -38,7 +38,8 @@
     "name": "Name",
     "color": "Color",
     "volume": "Volume",
-    "hotkey": "Hotkey"
+    "hotkey": "Hotkey",
+    "trim": "Trim audio..."
   },
   "modal": {
     "cancel": "Cancel",
@@ -55,7 +56,25 @@
     "name": "Name",
     "namePlaceholder": "Sound name",
     "submit": "Add",
-    "downloading": "Downloading..."
+    "downloading": "Downloading...",
+    "trimAfter": "Trim a clip after importing"
+  },
+  "trim": {
+    "title": "Trim audio — {{name}}",
+    "loading": "Loading audio...",
+    "loadError": "Couldn't read this audio file.",
+    "hint": "Drag the markers on the waveform (or type the times) to choose the part to keep, then listen to it before saving.",
+    "start": "Start (s)",
+    "end": "End (s)",
+    "preview": "Preview clip",
+    "stop": "Stop",
+    "selection": "Clip: {{length}} s out of {{total}} s",
+    "replaceHint": "\"Replace sound\" overwrites this sound's original audio (irreversible). \"Save as new sound\" keeps the original and adds the clip next to it — handy for pulling several clips from one file.",
+    "saveReplace": "Replace sound",
+    "saveNew": "Save as new sound",
+    "saving": "Saving...",
+    "saveError": "Couldn't save the clip.",
+    "newSoundSuffix": "(clip)"
   },
   "hotkey": {
     "record": "Click to record",

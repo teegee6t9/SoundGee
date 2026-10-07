@@ -6,7 +6,7 @@ import type { AppState } from '@shared/types'
 interface Props {
   soundboardId: string
   onClose: () => void
-  onImported: (state: AppState) => void
+  onImported: (state: AppState, trimAfter: boolean) => void
 }
 
 export function ImportSoundModal({ soundboardId, onClose, onImported }: Props): React.JSX.Element {
@@ -14,6 +14,7 @@ export function ImportSoundModal({ soundboardId, onClose, onImported }: Props): 
   const [filePath, setFilePath] = useState<string | null>(null)
   const [url, setUrl] = useState('')
   const [name, setName] = useState('')
+  const [trimAfter, setTrimAfter] = useState(false)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -37,7 +38,7 @@ export function ImportSoundModal({ soundboardId, onClose, onImported }: Props): 
       const state = filePath
         ? await window.api.addSoundFromFile(soundboardId, filePath, name.trim())
         : await window.api.addSoundFromUrl(soundboardId, url.trim(), name.trim())
-      onImported(state)
+      onImported(state, trimAfter)
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e))
     } finally {
@@ -82,6 +83,13 @@ export function ImportSoundModal({ soundboardId, onClose, onImported }: Props): 
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
+      </div>
+
+      <div className="form-row">
+        <label>
+          <input type="checkbox" checked={trimAfter} onChange={(e) => setTrimAfter(e.target.checked)} />{' '}
+          {t('import.trimAfter')}
+        </label>
       </div>
 
       {error && <p className="error-text">{error}</p>}
