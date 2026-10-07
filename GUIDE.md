@@ -26,6 +26,21 @@
 3. Donne un nom au son, valide. Il apparaît en tuile dans la grille — clique dessus pour le jouer.
 4. Clique sur le ⋮ d'une tuile pour modifier son nom, sa couleur, son volume, lui assigner un raccourci, ou le supprimer.
 
+### 3bis. Ne garder qu'un extrait d'un son (optionnel)
+
+Pratique si tu as extrait l'audio d'une vidéo et que seul un petit passage t'intéresse.
+
+1. Deux façons d'ouvrir l'éditeur de découpe :
+   - **À l'import** : coche **"Couper un extrait après l'import"** dans la fenêtre d'ajout de son, l'éditeur s'ouvre dès que le fichier est ajouté.
+   - **Sur un son déjà ajouté** : clique sur le ⋮ de sa tuile, puis sur **"Couper l'audio..."**.
+2. Choisis l'extrait : fais glisser les deux repères sur la forme d'onde, ou tape les temps de début et de fin (en secondes). La zone gardée est en surbrillance, le reste est assombri.
+3. Clique sur **"Écouter l'extrait"** pour entendre uniquement la sélection (tu peux ajuster les repères et réécouter autant de fois que tu veux).
+4. Enregistre :
+   - **"Remplacer le son"** : le son ne contient plus que l'extrait, l'audio d'origine est supprimé (irréversible).
+   - **"Enregistrer comme nouveau son"** : l'original reste intact et l'extrait est ajouté à côté, sous le nom « nom (extrait) » — pratique pour tirer plusieurs extraits d'un même fichier.
+
+L'extrait est enregistré au format WAV. Pour un fichier très long (plus d'une heure), la découpe peut être lente et gourmande en mémoire : mieux vaut le couper en deux fois.
+
 ### 4. Assigner un raccourci clavier
 
 1. Ouvre l'édition d'un son (⋮), puis clique sur le bouton de raccourci ("Cliquer pour enregistrer").
@@ -100,6 +115,21 @@ Ce réglage est par application et reste actif tant que tu ne le changes pas (ut
    - **Direct URL**: paste a link pointing directly to an audio file.
 3. Name the sound and confirm. It appears as a tile in the grid — click it to play it.
 4. Click the ⋮ on a tile to edit its name, color, volume, assign a hotkey, or delete it.
+
+### 3b. Keep only a clip of a sound (optional)
+
+Handy if you extracted the audio from a video and only a short part interests you.
+
+1. Two ways to open the trim editor:
+   - **At import**: tick **"Trim a clip after importing"** in the add-sound window, the editor opens as soon as the file is added.
+   - **On an existing sound**: click the ⋮ on its tile, then **"Trim audio..."**.
+2. Pick the clip: drag the two markers on the waveform, or type the start and end times (in seconds). The kept part is highlighted, the rest is dimmed.
+3. Click **"Preview clip"** to hear only the selection (adjust the markers and listen again as many times as you like).
+4. Save:
+   - **"Replace sound"**: the sound now only contains the clip, the original audio is deleted (irreversible).
+   - **"Save as new sound"**: the original stays untouched and the clip is added next to it, named "name (clip)" — handy for pulling several clips from one file.
+
+The clip is saved as WAV. For a very long file (over an hour), trimming can be slow and memory-hungry: better to cut it in two passes.
 
 ### 4. Assign a keyboard shortcut
 

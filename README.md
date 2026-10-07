@@ -15,6 +15,7 @@ SoundGee permet de créer plusieurs soundboards (des "packs"), d'y importer des 
 
 - Plusieurs packs de sons, chacun avec sa propre grille de sons
 - Import de sons depuis un fichier local ou une URL directe
+- Découpe audio : ne garde qu'un extrait d'un son (forme d'onde, repères à glisser, aperçu avant d'enregistrer)
 - Raccourcis clavier globaux par son, avec détection correcte du clavier (AZERTY, QWERTY, etc.)
 - **Profils par application** : associe un pack à une ou plusieurs applications (ex: un jeu) pour que ses raccourcis ne soient actifs que quand cette application a le focus — évite les conflits de touches entre packs. Les packs sans application associée ("généraux") restent toujours actifs.
 - Lecture simultanée sur plusieurs sorties audio (ex: tes haut-parleurs + un câble audio virtuel, pour que les autres t'entendent en vocal)
@@ -67,6 +68,7 @@ SoundGee lets you create multiple soundboards ("packs"), import sounds into them
 
 - Multiple sound packs, each with its own sound grid
 - Import sounds from a local file or a direct URL
+- Audio trimming: keep only a clip of a sound (waveform, draggable markers, preview before saving)
 - Global per-sound keyboard shortcuts, with correct keyboard layout detection (AZERTY, QWERTY, etc.)
 - **Per-application profiles**: link a pack to one or more applications (e.g. a game) so its hotkeys are only active while that application is focused — avoids hotkey conflicts between packs. Packs with no linked application ("general") always stay active.
 - Simultaneous playback on multiple audio outputs (e.g. your speakers + a virtual audio cable, so others can hear you in voice chat)
