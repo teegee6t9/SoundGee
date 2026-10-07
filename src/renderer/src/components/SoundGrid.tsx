@@ -5,6 +5,7 @@ import { playSound } from '../audio/playback'
 import { SoundTile } from './SoundTile'
 import { ImportSoundModal } from './ImportSoundModal'
 import { SoundEditorModal } from './SoundEditorModal'
+import { TrimModal } from './TrimModal'
 import type { Sound } from '@shared/types'
 
 export function SoundGrid(): React.JSX.Element {
@@ -16,6 +17,7 @@ export function SoundGrid(): React.JSX.Element {
 
   const [importOpen, setImportOpen] = useState(false)
   const [editingSound, setEditingSound] = useState<Sound | null>(null)
+  const [trimmingSound, setTrimmingSound] = useState<Sound | null>(null)
 
   const board = soundboards.find((b) => b.id === selectedBoardId) ?? null
 
@@ -48,9 +50,14 @@ export function SoundGrid(): React.JSX.Element {
         <ImportSoundModal
           soundboardId={board.id}
           onClose={() => setImportOpen(false)}
-          onImported={(state) => {
+          onImported={(state, trimAfter) => {
             applyState(state)
             setImportOpen(false)
+            if (trimAfter) {
+              // addSound* appends, so the freshly imported sound is the last one
+              const imported = state.soundboards.find((b) => b.id === board.id)?.sounds.at(-1)
+              if (imported) setTrimmingSound(imported)
+            }
           }}
         />
       )}
@@ -65,6 +72,19 @@ export function SoundGrid(): React.JSX.Element {
             applyState(state)
             setEditingSound(null)
           }}
+          onTrim={() => {
+            setTrimmingSound(editingSound)
+            setEditingSound(null)
+          }}
+        />
+      )}
+
+      {trimmingSound && (
+        <TrimModal
+          soundboardId={board.id}
+          sound={trimmingSound}
+          onClose={() => setTrimmingSound(null)}
+          onSaved={(state) => applyState(state)}
         />
       )}
     </main>

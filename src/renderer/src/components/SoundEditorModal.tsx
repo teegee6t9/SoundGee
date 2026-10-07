@@ -10,9 +10,17 @@ interface Props {
   onClose: () => void
   onChanged: (state: AppState) => void
   onDeleted: (state: AppState) => void
+  onTrim: () => void
 }
 
-export function SoundEditorModal({ soundboardId, sound, onClose, onChanged, onDeleted }: Props): React.JSX.Element {
+export function SoundEditorModal({
+  soundboardId,
+  sound,
+  onClose,
+  onChanged,
+  onDeleted,
+  onTrim
+}: Props): React.JSX.Element {
   const { t } = useTranslation()
   const [name, setName] = useState(sound.name)
   const [color, setColor] = useState(sound.color || '#7c3aed')
@@ -54,6 +62,12 @@ export function SoundEditorModal({ soundboardId, sound, onClose, onChanged, onDe
           value={volume}
           onChange={(e) => setVolume(Number(e.target.value))}
         />
+      </div>
+
+      <div className="form-row">
+        <button type="button" onClick={onTrim}>
+          {t('sound.trim')}
+        </button>
       </div>
 
       <div className="form-row">

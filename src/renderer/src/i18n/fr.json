@@ -38,7 +38,8 @@
     "name": "Nom",
     "color": "Couleur",
     "volume": "Volume",
-    "hotkey": "Raccourci"
+    "hotkey": "Raccourci",
+    "trim": "Couper l'audio..."
   },
   "modal": {
     "cancel": "Annuler",
@@ -55,7 +56,25 @@
     "name": "Nom",
     "namePlaceholder": "Nom du son",
     "submit": "Ajouter",
-    "downloading": "Téléchargement..."
+    "downloading": "Téléchargement...",
+    "trimAfter": "Couper un extrait après l'import"
+  },
+  "trim": {
+    "title": "Couper l'audio — {{name}}",
+    "loading": "Chargement de l'audio...",
+    "loadError": "Impossible de lire ce fichier audio.",
+    "hint": "Fais glisser les repères sur la forme d'onde (ou saisis les temps) pour choisir l'extrait à garder, puis écoute-le avant d'enregistrer.",
+    "start": "Début (s)",
+    "end": "Fin (s)",
+    "preview": "Écouter l'extrait",
+    "stop": "Arrêter",
+    "selection": "Extrait : {{length}} s sur {{total}} s",
+    "replaceHint": "« Remplacer le son » écrase l'audio d'origine de ce son (irréversible). « Enregistrer comme nouveau son » garde l'original et ajoute l'extrait à côté — pratique pour tirer plusieurs extraits d'un même fichier.",
+    "saveReplace": "Remplacer le son",
+    "saveNew": "Enregistrer comme nouveau son",
+    "saving": "Enregistrement...",
+    "saveError": "Impossible d'enregistrer l'extrait.",
+    "newSoundSuffix": "(extrait)"
   },
   "hotkey": {
     "record": "Cliquer pour enregistrer",

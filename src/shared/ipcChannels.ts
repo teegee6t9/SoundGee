@@ -29,5 +29,7 @@ export const IPC = {
   GET_APP_VERSION: 'app:get-version',
   CHECK_VOICEMEETER_INSTALLED: 'voicemeeter:check-installed',
   INSTALL_VOICEMEETER: 'voicemeeter:install',
-  CONFIGURE_VOICEMEETER_MIXING: 'voicemeeter:configure-mixing'
+  CONFIGURE_VOICEMEETER_MIXING: 'voicemeeter:configure-mixing',
+  READ_SOUND_FILE: 'sound:read-file',
+  SAVE_TRIMMED_SOUND: 'sound:save-trimmed'
 } as const

@@ -73,5 +73,15 @@ export const CHANGELOG: Record<string, ChangelogEntry> = {
     en: [
       'New guide in the audio wizard: how to also share music or a video (Spotify, YouTube, VLC...) with your friends, in addition to SoundGee\'s sounds, using Windows\' per-app audio routing.'
     ]
+  },
+  '2.3.0': {
+    fr: [
+      'Découpe audio : ne garde qu\'un extrait d\'un son (par exemple un passage d\'une vidéo dont tu as extrait le son). Forme d\'onde, repères à faire glisser ou temps à saisir, et aperçu avant d\'enregistrer.',
+      'Accessible à l\'import (case « Couper un extrait après l\'import ») ou depuis le ⋮ d\'un son (« Couper l\'audio... »), avec le choix entre remplacer le son ou créer un nouveau son à côté.'
+    ],
+    en: [
+      'Audio trimming: keep only a clip of a sound (for example a passage from a video whose audio you extracted). Waveform, draggable markers or typed times, and a preview before saving.',
+      'Available at import ("Trim a clip after importing" checkbox) or from a sound\'s ⋮ menu ("Trim audio..."), with the choice of replacing the sound or creating a new sound next to it.'
+    ]
   }
 }
